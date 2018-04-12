@@ -5,15 +5,39 @@ Name:  <replace this with your name>
 
 Problem 6.
 
-(a)
+(a) The testThrowsIllegalArgumentException test fails because the code 
+throws an IllegalArgumentException for an input it shouldn't. An 
+IllegalArgumentException exception should only be thrown when given 
+a negative input. The code threw an IllegalArgumentException for the 
+input 0 (a non-negative), so the test did not pass. To fix this, I 
+changed the condition that throws the exception from "n <= 0" to
+"n < 0", so it only throws exceptions for negative inputs.
 
+(b) The testBaseCase test fails because when given the base case input
+0, the code does not return the correct value (1), instead it throws
+an IllegalArgumentException that says "0 is negative". Again, this is
+because when given 0, the code enters the wrong branch. My fix in
+part (a) also fixed this issue because it allows the input 0 to avoid
+the branch for negative numbers. 
 
-(b)
+(c) The testInductiveCase test fails when given the input 2. It 
+returns 1 when it should return 2. This is because the base case 
+conditional accepts 0, 1, and 2 as base cases, when only 0 and 1 are
+the base cases. To fix this I changed the base case conditional from 
+"n <= 2" to "n <= 1".
 
-
-(c)
+	This allows the input 2 to avoid the base case branch, but the test
+still fails. This time, the code returned 0 when it should return 2. 
+That made me realize that the return statement subtracts the two 
+recursive calls instead of adding them. So to fix this, I changed 
+the "-" to a "+" between the two recursive calls in the return 
+statement.
 
 
 Problem 7. 
 
-<replace this line with your answers>
+The Ball object fails the test because it always returns 0 for the 
+volume. To fix this I changed it to "return this.volume". 
+In addition, when creating a Ball, the volume field of "this" is 
+never set to the volume parameter. To fix this, I changed the 
+constructor body to be "this.volume = volume".
