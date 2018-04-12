@@ -36,15 +36,34 @@ statement.
 
 Problem 7. 
 
-The Ball object fails the test because it always returns 0 for the 
+(a) The Ball object fails the test because it always returns 0 for the 
 volume. To fix this I changed the body of getVolume to 
 "return this.volume". In addition, when creating a Ball, the volume 
 field of "this" is never set to the volume parameter. To fix this, 
 I changed the constructor body to be "this.volume = volume".
 
-I think it is better to implement getVolume by keeping track of the
+(b) I think it is better to implement getVolume by keeping track of the
 total volume as Balls are added and removed for two reasons. First,
 we will avoid calculating the total volume every call, and always
 have the total volume ready. Second, if the BallContainer is very large,
 calculating the total volume could be very expensive, so we want
 to minimize the number of times we compute the total volume. 
+
+(c) One implementation of getBallsFromSmallest() is doing all the work
+in the getBallsFromSmallest() method. To do this, create an inner class 
+defining a comparator for Balls based on volume. Then moved the Balls 
+in the Box from the Box to a sort-able structure like an ArrayList. 
+Finally, call Collections.sort() on that structure, passing in a new
+comparator object defined in the inner class and return the product
+as an iterator. A second approach could be to define a new field in the 
+Box class that is a sort-able structure, like a SortedSet, of type Ball.
+You would also need to define a comparator class to compare Balls by volume. 
+The data structure would be updated and sorted every time a Ball is added or 
+removed, using the comparator. This way, the implementor will always have a 
+sorted Ball structure to use.
+
+I think the first implementation is better. The second implementation keeps 
+track of two data structures that hold the same elements, which is unnecessary.
+The first implementation also allows for more code reuse, as BallContainer 
+already has a Set that holds all the elements. 
+
