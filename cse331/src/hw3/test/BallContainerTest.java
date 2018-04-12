@@ -124,6 +124,7 @@ public class BallContainerTest {
     @Test
     public void testClear() {
         ballcontainer.clear();
+        System.out.println(ballcontainer.size()	);
         assertEquals("BallContainer is not empty after being cleared!",
                      0, ballcontainer.size());
         ballcontainer.add(b[0]);

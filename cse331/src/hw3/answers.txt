@@ -37,7 +37,14 @@ statement.
 Problem 7. 
 
 The Ball object fails the test because it always returns 0 for the 
-volume. To fix this I changed it to "return this.volume". 
-In addition, when creating a Ball, the volume field of "this" is 
-never set to the volume parameter. To fix this, I changed the 
-constructor body to be "this.volume = volume".
+volume. To fix this I changed the body of getVolume to 
+"return this.volume". In addition, when creating a Ball, the volume 
+field of "this" is never set to the volume parameter. To fix this, 
+I changed the constructor body to be "this.volume = volume".
+
+I think it is better to implement getVolume by keeping track of the
+total volume as Balls are added and removed for two reasons. First,
+we will avoid calculating the total volume every call, and always
+have the total volume ready. Second, if the BallContainer is very large,
+calculating the total volume could be very expensive, so we want
+to minimize the number of times we compute the total volume. 
