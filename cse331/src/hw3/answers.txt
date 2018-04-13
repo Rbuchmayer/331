@@ -26,7 +26,7 @@ conditional accepts 0, 1, and 2 as base cases, when only 0 and 1 are
 the base cases. To fix this I changed the base case conditional from 
 "n <= 2" to "n <= 1".
 
-	This allows the input 2 to avoid the base case branch, but the test
+This allows the input 2 to avoid the base case branch, but the test
 still fails. This time, the code returned 0 when it should return 2. 
 That made me realize that the return statement subtracts the two 
 recursive calls instead of adding them. So to fix this, I changed 
@@ -42,7 +42,9 @@ volume. To fix this I changed the body of getVolume to
 field of "this" is never set to the volume parameter. To fix this, 
 I changed the constructor body to be "this.volume = volume".
 
-(b) I think it is better to implement getVolume by keeping track of the
+(b) It really depends on how often getVolume() is going to be called
+to determine the best implementation. But assuming we don't know this, 
+I think it is better to implement getVolume by keeping track of the
 total volume as Balls are added and removed for two reasons. First,
 we will avoid calculating the total volume every call, and always
 have the total volume ready. Second, if the BallContainer is very large,
@@ -53,7 +55,7 @@ to minimize the number of times we compute the total volume.
 in the getBallsFromSmallest() method. To do this, create an inner class 
 defining a comparator for Balls based on volume. Then moved the Balls 
 in the Box from the Box to a sort-able structure like an ArrayList. 
-Finally, call Collections.sort() on that structure, passing in a new
+Finally, call Collections.sort(comparator) on that structure, passing in a new
 comparator object defined in the inner class and return the product
 as an iterator. A second approach could be to define a new field in the 
 Box class that is a sort-able structure, like a SortedSet, of type Ball.
