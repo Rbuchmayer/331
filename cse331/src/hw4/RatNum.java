@@ -218,7 +218,7 @@ public final class RatNum extends Number implements Comparable<RatNum> {
         @requires arg != null
         @return a RatNum equal to (this - arg).
         If either argument is NaN, then returns NaN.
-   */
+   */ 	
   public RatNum sub(RatNum arg) {
     // a/b - x/y = a/b + -x/y
     return this.add(arg.negate());

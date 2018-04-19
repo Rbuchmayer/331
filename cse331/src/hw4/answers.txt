@@ -1,39 +1,133 @@
 CSE 331 Homework 4.  Answers to Written questions.
 Edit this file to supply your answers.
 
-Name:  <replace this with your name>
+Name:  Ryan Buchmayer
 
 Problem 0.
 
-(a)
+(a) Case for adding a term to a poly, r = t + p:
+
+	set r = p by making a term-by-term copy of all terms in p to r
+	foreach term t_r in r
+		if t_r has the same degree as t
+		    replace t_r in r with the sum of t_r and t
+			return r
+	insert t into r as a new term in sorted order
+	return r
 
 
-(b)
+	Case for multiplying two polys, r = p * q;  
+	
+	initialize a new list lst 
+	foreach term t_q in q
+		set a new poly z to 0 
+		foreach term t_p in p
+			add the product of term t_q and term t_p to poly z
+		add poly z to lst
+	Initialize a new poly r to 0
+	foreach poly z_n in lst
+		set r equal to the sum of r and z_n
+	return r
+		
+(b)  Case for dividing two polys r = p / q:
+
+	 Make sure q is not 0
+	 Set "a" to p and "b" to q with a term-by-term copy 
+	 Set poly "result" to 0 
+	 While (a is not 0) and (degree of a_first_term >= degree of b_first_term)
+	 	Set new term "coeff" to t_a_first / t_b_first
+	 	Set result to result plus coeff
+	 	Set new poly "temp" to hold coeff
+	 	Set a to a minus poly * (temp * b) 
+	 return result 
 
 
-(c)
+(c) Example (x^3+x-1) / (x+1) = x^2-x+2:
 
+	p = (x^3+x-1)
+	q = (x+1)
+	a = (x^3+x-1) = copy of p
+	b = (x+1) = copy of q
+	result = 0
+	
+	While (a is not 0) and (degree of a_first_term >= degree of b_first_term)
+		Iteration 1:
+					temp = x^2
+					result = x^2
+					a = -x^2+x-1
+		Iteration 2:
+					temp = -x
+					result = x^2-x
+					a = 2x-1
+		Iteration 3:
+					temp = 2
+					result = x^2-x+2
+					a = -3
+					
+		Loop exited because the degree of the first term of "a" is 
+		less that the degree of the first term of "b". So we return 
+		result = x^2-x+2 and we have a = -3 for the remainder.
 
 Problem 1.
 
-(a)
+(a) The implementations that would need to change are:
 
+		checkRep: the code that checks if the ratio is reduced can 
+			be removed.
+		RatNum(int n, int d) constructor: the three lines of code that
+			reduce the ratio can be removed
+		Equals: Code needs to be added to check if un-reduced ratios are equal (ex. 1/2 and 5/10).
+			This could be done by making new temporary variables for each ratio in 
+			reduced form, then checking if the numer and denom are equal.
+		hashCode: Code needs to be added to hash equal, but differently reduced
+			ratios (ex. 1/2 and 5/10). There are many ways to do this, one could be making
+			a new temporary variable of the ratio in reduced form before hashing. 
+		toString: this.RatNum should first be reduced to maintain the spec. This should 
+			be done with a new temporary variable because RatNums are immutable.
+			
+		While eliminating code from checkRep and RatNum(int n, int d) would make the code 
+		clearer and quicker, adding checks to Equals, hashCode, and toString makes the code
+		slower and more cluttered. Overall, the program could be less efficient when 
+		computing operations on RatNums because they may not be reduced.  
+			
+		
+(b) First, this would break the contract of the RatNum class that states "RatNum represents an 
+immutable rational number" because these changes mutate the RatNum and hand it directly to the client. 
+Next, it violates the JavaDoc of each operation method because the JavaDoc does not say anything 
+should be modified. Mutating the fields would break this contract as well.
 
-(b)
+(c) Once a RatNum is constructed, it is immutable, so we know it will not change. This is why 
+CheckRep() is only needed in the constructors. Furthermore, once a rational is reduced, it will still
+be reduced after basic operations with another reduced rational.  
 
-
-(c)
-
-
+								
 Problem 2.
 
-(a)
+(a) I only have a checkRep() at the end of the constructor. RatTerms are immutable 
+because the class and its fields are "final", meaning they can only be defined once. So
+I know they will never change after constructed. That being said, I still need to check
+that the RatTerm I am constructing satisfies the Rep Invariant.
 
+(b) First, we need to get rid of the code in the constructor that sets the exponent
+ of all 0 terms to 0. We should set the exponent to whatever the client passes in. 
+ Then we should update the checkRep() to enforce the new Rep invariant.
+ Next, we need to change isZero() because it looks for a 0 exponent. We should only 
+ check that the coefficient is 0. Next, we need to change Equals() so it accounts 
+ for "0" terms with different exponents. This can be done with a simple check. We 
+ also need to change hashCode() so it returns the same integer for "0" terms with 
+ different exponents. Finally, we should add a check of isZero() in toString(). All
+ of these changes make the code more complex because we are adding a lot of additional 
+ checks.
 
-(b)
-
-
-(c)
+(c) The constructor needs to be changed to check if a "NaN" is being passed in. If it is,
+then its exponent needs to be 0. checkRep() needs to be updated to enforce this change. 
+Now we can be sure that every NaN RatTerm has a 0 exponent. I think this would overall make
+the code clearer. I prefer both sets of Rep invariants because it makes implementation more clear.
 
 
 Problem 5.
+
+8*x^3-x
+3*x-1
+x^3-2*x+1
+x^2

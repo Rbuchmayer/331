@@ -1,5 +1,6 @@
 package hw4;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -19,208 +20,244 @@ import java.util.Stack;
  */
 public final class RatPolyStack implements Iterable<RatPoly> {
 
-  private final Stack<RatPoly> polys;
+	private final Stack<RatPoly> polys;
 
-  // Abstraction Function:
-  // Each element of a RatPolyStack, s, is mapped to the
-  // corresponding element of polys.
-  //
-  // RepInvariant:
-  // polys != null &&
-  // forall i such that (0 <= i < polys.size(), polys.get(i) != null
+	// Abstraction Function:
+	// Each element of a RatPolyStack, s, is mapped to the
+	// corresponding element of polys.
+	//
+	// RepInvariant:
+	// polys != null &&
+	// forall i such that (0 <= i < polys.size(), polys.get(i) != null
 
-  /**
-   * @effects Constructs a new RatPolyStack, [].
-   */
-  public RatPolyStack() {
-    polys = new Stack<RatPoly>();
-    checkRep();
-  }
+	/**
+	 * @effects Constructs a new RatPolyStack, [].
+	 */
+	public RatPolyStack() {
+		polys = new Stack<RatPoly>();
+		checkRep();
+	}
 
-  /**
-   * Returns the number of RayPolys in this RatPolyStack.
-   *
-   * @return the size of this sequence.
-   */
-  public int size() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->size() is not yet implemented");
-  }
+	/**
+	 * Returns the number of RayPolys in this RatPolyStack.
+	 *
+	 * @return the size of this sequence.
+	 */
+	public int size() {
+		return this.polys.size();
+	}
 
-  /**
-   * Pushes a RatPoly onto the top of this.
-   *
-   * @param p The RatPoly to push onto this stack.
-   * @requires p != null
-   * @modifies this
-   * @effects this_post = [p]:this
-   */
-  public void push(RatPoly p) {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->push() is not yet implemented");
-  }
+	/**
+	 * Pushes a RatPoly onto the top of this.
+	 *
+	 * @param p
+	 *            The RatPoly to push onto this stack.
+	 * @requires p != null
+	 * @modifies this
+	 * @effects this_post = [p]:this
+	 */
 
-  /**
-   * Removes and returns the top RatPoly.
-   *
-   * @requires this.size() > 0
-   * @modifies this
-   * @effects If this = [p]:S then this_post = S
-   * @return p where this = [p]:S
-   */
-  public RatPoly pop() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->pop() is not yet implemented");
-  }
+	public void push(RatPoly p) {
+		checkRep();
+		this.polys.push(p);
+		checkRep();
+	}
 
-  /**
-   * Duplicates the top RatPoly on this.
-   *
-   * @requires this.size() > 0
-   * @modifies this
-   * @effects If this = [p]:S then this_post = [p, p]:S
-   */
-  public void dup() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->dup() is not yet implemented");
-  }
+	/**
+	 * Removes and returns the top RatPoly.
+	 *
+	 * @requires this.size() > 0
+	 * @modifies this
+	 * @effects If this = [p]:S then this_post = S
+	 * @return p where this = [p]:S
+	 */
+	public RatPoly pop() {
+		checkRep();
+		return this.polys.pop();
+		
+	}
 
-  /**
-   * Swaps the top two elements of this.
-   *
-   * @requires this.size() >= 2
-   * @modifies this
-   * @effects If this = [p1, p2]:S then this_post = [p2, p1]:S
-   */
-  public void swap() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->swap() is not yet implemented");
-  }
+	/**
+	 * Duplicates the top RatPoly on this.
+	 *
+	 * @requires this.size() > 0
+	 * @modifies this
+	 * @effects If this = [p]:S then this_post = [p, p]:S
+	 */
+	public void dup() {
+		checkRep();
+		this.polys.push(this.polys.peek());
+		checkRep();
+	}
 
-  /**
-   * Clears the stack.
-   *
-   * @modifies this
-   * @effects this_post = []
-   */
-  public void clear() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->clear() is not yet implemented");
-  }
+	/**
+	 * Swaps the top two elements of this.
+	 *
+	 * @requires this.size() >= 2
+	 * @modifies this
+	 * @effects If this = [p1, p2]:S then this_post = [p2, p1]:S
+	 */
+	public void swap() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		RatPoly rp2 = this.polys.pop();
+		this.polys.push(rp1);
+		this.polys.push(rp2);
+		checkRep();
+	}
 
-  /**
-   * Returns the RatPoly that is 'index' elements from the top of the stack.
-   *
-   * @param index The index of the RatPoly to be retrieved.
-   * @requires index >= 0 && index < this.size()
-   * @return If this = S:[p]:T where S.size() = index, then returns p.
-   */
-  public RatPoly getNthFromTop(int index) {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException(
-        "RatPolyStack->getNthFromTop() unimplemented!\n");
-  }
+	/**
+	 * Clears the stack.
+	 *
+	 * @modifies this
+	 * @effects this_post = []
+	 */
+	public void clear() {
+		checkRep();
+		this.polys.clear();
+		checkRep();
+	}
 
-  /**
-   * Pops two elements off of the stack, adds them, and places the result on
-   * top of the stack.
-   *
-   * @requires this.size() >= 2
-   * @modifies this
-   * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p1 + p2
-   */
-  public void add() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->add() is not yet implemented");
-  }
+	/**
+	 * Returns the RatPoly that is 'index' elements from the top of the stack.
+	 *
+	 * @param index
+	 *            The index of the RatPoly to be retrieved.
+	 * @requires index >= 0 && index < this.size()
+	 * @return If this = S:[p]:T where S.size() = index, then returns p.
+	 */
+	public RatPoly getNthFromTop(int index) {
+		checkRep();
+		RatPoly rp = null;
+		Stack<RatPoly> aux = new Stack<RatPoly>();
+		int size = this.size();
+		for(int i = 0; i < size; i++){
+			if(i == index){
+				rp = this.polys.peek();
+			}
+			aux.push(this.polys.pop());
+		}
+		for(int i = 0; i < size; i++){
+			this.polys.push(aux.pop());
+		}
+		return rp;
+	}
 
-  /**
-   * Subtracts the top poly from the next from top poly, pops both off the
-   * stack, and places the result on top of the stack.
-   *
-   * @requires this.size() >= 2
-   * @modifies this
-   * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p2 - p1
-   */
-  public void sub() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->sub() is not yet implemented");
-  }
+	/**
+	 * Pops two elements off of the stack, adds them, and places the result on
+	 * top of the stack.
+	 *
+	 * @requires this.size() >= 2
+	 * @modifies this
+	 * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p1 + p2
+	 */
+	public void add() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		RatPoly rp2 = this.polys.pop();
+		this.polys.push(rp1.add(rp2));
+		checkRep();
+	}
 
-  /**
-   * Pops two elements off of the stack, multiplies them, and places the
-   * result on top of the stack.
-   *
-   * @requires this.size() >= 2
-   * @modifies this
-   * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p1 * p2
-   */
-  public void mul() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->mul() is not yet implemented");
-  }
+	/**
+	 * Subtracts the top poly from the next from top poly, pops both off the
+	 * stack, and places the result on top of the stack.
+	 *
+	 * @requires this.size() >= 2
+	 * @modifies this
+	 * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p2 - p1
+	 */
+	public void sub() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		RatPoly rp2 = this.polys.pop();
+		this.polys.push(rp2.sub(rp1));
+		checkRep();
+	}
 
-  /**
-   * Divides the next from top poly by the top poly, pops both off the stack,
-   * and places the result on top of the stack.
-   *
-   * @requires this.size() >= 2
-   * @modifies this
-   * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p2 / p1
-   */
-  public void div() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->div() is not yet implemented");
-  }
+	/**
+	 * Pops two elements off of the stack, multiplies them, and places the
+	 * result on top of the stack.
+	 *
+	 * @requires this.size() >= 2
+	 * @modifies this
+	 * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p1 * p2
+	 */
+	public void mul() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		RatPoly rp2 = this.polys.pop();
+		this.polys.push(rp1.mul(rp2));
+		checkRep();
+	}
 
-  /**
-   * Pops the top element off of the stack, differentiates it, and places the
-   * result on top of the stack.
-   *
-   * @requires this.size() >= 1
-   * @modifies this
-   * @effects If this = [p1]:S then this_post = [p2]:S where p2 = derivative
-   *          of p1
-   */
-  public void differentiate() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException(
-        "RatPolyStack->differentiate() unimplemented!\n");
-  }
+	/**
+	 * Divides the next from top poly by the top poly, pops both off the stack,
+	 * and places the result on top of the stack.
+	 *
+	 * @requires this.size() >= 2
+	 * @modifies this
+	 * @effects If this = [p1, p2]:S then this_post = [p3]:S where p3 = p2 / p1
+	 */
+	public void div() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		RatPoly rp2 = this.polys.pop();
+		this.polys.push(rp2.div(rp1));
+		checkRep();
+	}
 
-  /**
-   * Pops the top element off of the stack, integrates it, and places the
-   * result on top of the stack.
-   *
-   * @requires this.size() >= 1
-   * @modifies this
-   * @effects If this = [p1]:S then this_post = [p2]:S where p2 = indefinite
-   *          integral of p1 with integration constant 0
-   */
-  public void integrate() {
-    // TODO: Fill in this method, then remove the RuntimeException
-    throw new RuntimeException("RatPolyStack->integrate() is not yet implemented");
-  }
+	/**
+	 * Pops the top element off of the stack, differentiates it, and places the
+	 * result on top of the stack.
+	 *
+	 * @requires this.size() >= 1
+	 * @modifies this
+	 * @effects If this = [p1]:S then this_post = [p2]:S where p2 = derivative
+	 *          of p1
+	 */
+	public void differentiate() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		this.polys.push(rp1.differentiate());
+		checkRep();
+	}
 
-  /**
-   * Returns an iterator of the elements contained in the stack.
-   *
-   * @return an iterator of the elements contained in the stack in order from
-   *         the bottom of the stack to the top of the stack.
-   */
-  @Override
-  public Iterator<RatPoly> iterator() {
-    return polys.iterator();
-  }
+	/**
+	 * Pops the top element off of the stack, integrates it, and places the
+	 * result on top of the stack.
+	 *
+	 * @requires this.size() >= 1
+	 * @modifies this
+	 * @effects If this = [p1]:S then this_post = [p2]:S where p2 = indefinite
+	 *          integral of p1 with integration constant 0
+	 */
+	public void integrate() {
+		checkRep();
+		RatPoly rp1 = this.polys.pop();
+		this.polys.push(rp1.antiDifferentiate(new RatNum(0)));
+		checkRep();
+	}
 
-  /**
-   * Checks that the representation invariant holds (if any).
-   */
-  private void checkRep() {
-    assert (polys != null) : "polys should never be null.";
-    
-    for (RatPoly p : polys) {
-        assert (p != null) : "polys should never contain a null element.";
-    }
-  }
+	/**
+	 * Returns an iterator of the elements contained in the stack.
+	 *
+	 * @return an iterator of the elements contained in the stack in order from
+	 *         the bottom of the stack to the top of the stack.
+	 */
+	@Override
+	public Iterator<RatPoly> iterator() {
+		return polys.iterator();
+	}
+
+	/**
+	 * Checks that the representation invariant holds (if any).
+	 */
+	private void checkRep() {
+		assert (polys != null) : "polys should never be null.";
+
+		for (RatPoly p : polys) {
+			assert (p != null) : "polys should never contain a null element.";
+		}
+	}
 }
