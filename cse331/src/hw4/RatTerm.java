@@ -184,6 +184,9 @@ public final class RatTerm {
 	 *         returns NaN.
 	 */
 	public RatTerm mul(RatTerm arg) {
+		if(this.isNaN() || arg.isNaN()){
+			return NaN;
+		}
 		return new RatTerm(this.coeff.mul(arg.coeff), this.expt + arg.expt);
 	}
 
@@ -197,7 +200,7 @@ public final class RatTerm {
 	 *         argument is NaN, then returns NaN.
 	 */
 	public RatTerm div(RatTerm arg) {
-		if (arg.isZero()) {
+		if (arg.isZero() || this.isNaN() || arg.isNaN()) {
 			return NaN;
 		}
 		return new RatTerm(this.coeff.div(arg.coeff), this.expt - arg.expt);
