@@ -140,6 +140,7 @@ public final class RatPolyStack implements Iterable<RatPoly> {
 		for(int i = 0; i < size; i++){
 			this.polys.push(aux.pop());
 		}
+		checkRep();
 		return rp;
 	}
 
