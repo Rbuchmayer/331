@@ -67,8 +67,9 @@ public final class RatPoly {
 	 */
 	private ArrayList<RatTerm> copy() {
 		ArrayList<RatTerm> temp = new ArrayList<RatTerm>();
-		for (int i = 0; i < terms.size(); i++)
+		for (int i = 0; i < terms.size(); i++){
 			temp.add(this.terms.get(i));
+		}
 		return temp;
 	}
 

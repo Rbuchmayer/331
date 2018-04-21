@@ -236,7 +236,7 @@ public final class RatPolyStack implements Iterable<RatPoly> {
 	public void integrate() {
 		checkRep();
 		RatPoly rp1 = this.polys.pop();
-		this.polys.push(rp1.antiDifferentiate(new RatNum(0)));
+		this.polys.push(rp1.antiDifferentiate(RatNum.ZERO));
 		checkRep();
 	}
 
