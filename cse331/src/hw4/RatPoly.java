@@ -60,7 +60,7 @@ public final class RatPoly {
 	/** A constant holding a zero value of type RatPoly */
 	public static final RatPoly ZERO = new RatPoly();
 
-	/** Helper procedure to deep copy the terms of a poly
+	/** Helper procedure to copy the terms of a poly
 	 * 
 	 * @return an ArrayList of RatTerms that is a term-by-term copy 
 	 *         of this.terms
@@ -68,7 +68,7 @@ public final class RatPoly {
 	private ArrayList<RatTerm> copy() {
 		ArrayList<RatTerm> temp = new ArrayList<RatTerm>();
 		for (int i = 0; i < terms.size(); i++)
-			temp.add(new RatTerm(terms.get(i).getCoeff(), terms.get(i).getExpt()));
+			temp.add(this.terms.get(i));
 		return temp;
 	}
 
