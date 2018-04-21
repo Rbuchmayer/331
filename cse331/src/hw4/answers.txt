@@ -87,7 +87,8 @@ Problem 1.
 			
 		While eliminating code from checkRep and RatNum(int n, int d) would make the code 
 		clearer and quicker, adding checks to Equals, hashCode, and toString makes the code
-		slower and more cluttered. Overall, the program could be less efficient when 
+		slower and more cluttered. The programmer would have to remember where and when to add
+		checks when maintaining the code. Overall, the program could be less efficient when 
 		computing operations on RatNums because they may not be reduced.  
 			
 		
@@ -117,12 +118,14 @@ that the RatTerm I am constructing satisfies the Rep Invariant.
  also need to change hashCode() so it returns the same integer for "0" terms with 
  different exponents. Finally, we should add a check of isZero() in toString(). All
  of these changes make the code more complex because we are adding a lot of additional 
- checks.
+ checks that slow the program. As the programmer, we need to remember to always pay 
+ attention to this new detail.
 
 (c) The constructor needs to be changed to check if a "NaN" is being passed in. If it is,
 then its exponent needs to be 0. checkRep() needs to be updated to enforce this change. 
 Now we can be sure that every NaN RatTerm has a 0 exponent. I think this would overall make
-the code clearer. I prefer both sets of Rep invariants because it makes implementation more clear.
+the code clearer, and we would have less to worry about. I prefer both sets of 
+Rep invariants because it makes implementation more clear.
 
 
 Problem 5.

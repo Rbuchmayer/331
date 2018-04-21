@@ -278,9 +278,8 @@ public final class RatPoly {
 	 *         p.isNaN(), returns some r such that r.isNaN()
 	 */
 	public RatPoly mul(RatPoly p) {
-		List<RatTerm> newP = p.copy();
 		List<RatTerm> newTerms = new ArrayList<RatTerm>();
-		for (RatTerm rt_p : newP) {
+		for (RatTerm rt_p : p.terms) {
 			for (RatTerm rt_q : this.terms) {
 				sortedInsert(newTerms, rt_p.mul(rt_q));
 			}
@@ -325,15 +324,13 @@ public final class RatPoly {
 			return NaN;
 		}
 		List<RatTerm> thisTerms = this.copy();
-		List<RatTerm> pTerms = p.copy();
 		RatPoly t = new RatPoly(thisTerms);
-		RatPoly q = new RatPoly(pTerms);
 		RatPoly result = new RatPoly();
-		while (t.terms.size() > 0 && t.degree() >= q.degree()) {
-			RatTerm rt = t.terms.get(0).div(q.terms.get(0));
+		while (t.terms.size() > 0 && t.degree() >= p.degree()) {
+			RatTerm rt = t.terms.get(0).div(p.terms.get(0));
 			RatPoly temp = new RatPoly(rt);
 			result = result.add(temp);
-			t = t.sub(temp.mul(q));
+			t = t.sub(temp.mul(p));
 		}
 		return result;
 	}
