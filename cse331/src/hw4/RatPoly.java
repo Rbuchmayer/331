@@ -90,7 +90,7 @@ public final class RatPoly {
 	public RatPoly(RatTerm rt) {
 		terms = new ArrayList<RatTerm>();
 		if (!rt.isZero()) {
-			terms.add(new RatTerm(rt.getCoeff(), rt.getExpt()));
+			terms.add(rt);
 		}
 		checkRep();
 	}
