@@ -1,26 +1,117 @@
 CSE 331 Homework 5.  Answers to Written questions.
 Edit this file to supply your answers.
 
-Name:  <replace this with your name>
+Name:  Ryan Buchmayer
 
 Problem 1. (Written exercises)
 
-(a)
+(a) IntQueue1:
 
+	AF: An IntQueue1 Object represents a queue such that 
+	entries = [] if the queue is empty or
+	entries = [n_1, n_2, ..., n_k], which is a queue where n 
+	is an element and k is the number of elements in the queue.
+		
+	RI: entries != null and for every element e in the queue, e != null.
+	
+	IntQueue2:
+	
+	AF: An IntQueue2 Object represents a queue such that 
+	if entries = [n_1, n_2, ..., n_k], front = i, and size = s
+	then the resulting queue is:
+	[] if size is 0
+    [n_(i+1), ..., n_(i+s)] if front + size <= entries.length
+	
+	RI: entries != null and front >= 0 and size >= 0 and front <= entries.length - 1
 
-(b)
+(b) Group 1: a, g, d
+	Group 2: b, h
+	Group 3: c, f
 
-
-(c)
+(c) 1) This would not expose representation because the method only
+	   returns a primitive int and no evidence of how
+	   it was computed.
+	   
+	2) This could expose representation because it returns a string list
+	   to the client, who could do whatever they want with it, including mutation.
+	   
+	3) This will not expose representation because the method is private,
+       so it can never be used by a client.
+       
+    4) This will not expose representation because we are giving the client
+       one immutable string that represents our object however we want to.
+       
+    5) If the iterator does not refer to a copy of our object, this could expose 
+       representation because we are returning an iterator that references our collection 
+       of ints. The client can do whatever they want with it, like remove or add an int.
+       
+    6) If the Deck constructor makes a deep copy of the list and all the cards in 
+       it, then representation will not be exposed. Otherwise, the client could 
+       mutate cards in the list.  
 
 
 Problem 2.  (Graph interface/operations)
 
-
+	I designed a Node, Edge, and Graph class. This made sense to me because it helps me 
+	visualize the abstract representation. It also breaks the Graph down into smaller Objects 
+	that make it up. If I did not make a Node and Edge class, Graph would be a god class and 
+	cluttered. Breaking things up like this also allows me to add more features later if I want.
+	Finally, I made Node and Edge immutable to minimize representation exposure.
+	
+	final class Node: One final field that holds the string
+		public Node(String s): so the client can create a Node
+		public String getData(): so the client can get the value of the Node
+		public String toString(): so the client can get an idea of the visualization
+		private checkRep(): to check rep
+		
+ 	final class Edge: Two final fields that hold a child Node and a label (String)
+ 		public Edge(Node child, String label): so the client can create Edges
+ 		public Node getChild(): so the client can see the destination of the Edge
+ 		public String getLabel(): so the client can see the label of the Edge
+ 		public String toString(): so the client can get an idea of the visualization
+ 		private checkRep(): to check rep
+ 		
+ 	class Graph(): One field holding a map that maps a Node to a set of outgoing Edges
+ 		public Graph(): so the client can create an empty Graph.
+ 		public int size(): useful method for the client to see how big the Graph is
+ 		public boolean isEmpty(): useful method for the client to check if their Graph
+ 			is empty.
+ 		public boolean contains(Node n): Useful for the client to check if a Node is 
+ 			in the Graph.
+ 		public void addNode(Node n): so clients can add Nodes to their Graph
+ 		public void removeNode(Node n): so clients can remove a Node they don't want
+ 		public void addEdge(Edge e): so clients can add Edges to their Graph.
+ 		public void removeEdge(Edge e): so clients can remove unwanted Edges.
+ 		public Set<Edge> getEdges(Node n): so clients can see the children of a Node
+ 		private checkRep(): to check rep
 
 Problem 3.  (Testing strategy)
 
-
+	My testing strategy was to write three test classes, one for Node, Edge, and Graph.
+	For testing my Node object, testing was pretty simple since it only has one String
+	field. So I just constructed a few Nodes with different data and tested all my public
+	methods on them. I never tested null values because all of my specifications require 
+	non nulls.
+	
+	Similar to Node, my Edge class is fairly simple to test. I created a few Edges with different
+	child Nodes and labels, and wrote tests on them with every public method.
+	
+	Finally, my Graph class was difficult to write tests for. My strategy was to test every public
+	method on a variety of different Graphs. So before every test, I used @Before to create 8 
+	unique Graphs: empty, one Node, multiple Nodes, etc. I tried to test Graphs with special cases, 
+	like a Node that has an Edge pointing to itself. I also made a slightly more complicated Graph with 3 Nodes and 5 Edges.
+	Then I wrote tests testing my public methods on these Graphs. When writing the tests, I tried to split 
+	them up by the specific case I was testing, like testAddNodeToEmptyGraph().  
+	
+	Changes I made to my Tests:
+		After implementation, I had to add tests for new public methods I decided to add: compareTo(),
+		equals(), and hashCode(). I also added some test that accounted for implementation details I did
+		not expect
 
 Problem 4.  (Representation)
+	I used a HashMap to represent my Graph. It maps a Node to a Set<Edge> of outgoing Edges. I chose 
+	this because it makes sense to me and HashMap is more efficient than TreeMap. An advantage of using
+	a collection of Edges is that you can quickly see which Nodes are connected and the runtime of adding
+	or removing an Edge would be very fast. An advantage of an adjacency matrix is fast runtime for 
+	checking if an edge exists and adding/removing edges.
 

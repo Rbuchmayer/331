@@ -1,0 +1,45 @@
+CreateGraph empty
+CreateGraph oneNode
+CreateGraph oneNodeOneEdge
+CreateGraph twoNodesTwoEdges
+CreateGraph twoNodesTwoOppositeEdges
+CreateGraph complexGraph
+AddNode oneNode n1
+AddNode oneNodeOneEdge n2
+AddEdge oneNodeOneEdge n2 n2 e1
+AddNode twoNodesTwoEdges n3
+AddNode twoNodesTwoEdges n4
+AddEdge twoNodesTwoEdges n3 n4 e2
+AddEdge twoNodesTwoEdges n3 n4 e3
+AddNode twoNodesTwoOppositeEdges n5
+AddNode twoNodesTwoOppositeEdges n6
+AddEdge twoNodesTwoOppositeEdges n5 n6 e4
+AddEdge twoNodesTwoOppositeEdges n6 n5 e5
+AddNode complexGraph f
+AddNode complexGraph b
+AddNode complexGraph c
+AddNode complexGraph d
+AddNode complexGraph e
+AddNode complexGraph a
+AddNode complexGraph g
+AddEdge complexGraph a b ab
+AddEdge complexGraph f b fb
+AddEdge complexGraph g f gf
+AddEdge complexGraph e e ee
+AddEdge complexGraph e c ec
+AddEdge complexGraph b g bg
+AddEdge complexGraph g c gc
+AddEdge complexGraph g g gg
+ListChildren oneNode n1
+ListChildren oneNodeOneEdge n2
+ListChildren twoNodesTwoEdges n3
+ListChildren twoNodesTwoEdges n4
+ListChildren twoNodesTwoOppositeEdges n5
+ListChildren twoNodesTwoOppositeEdges n6
+ListChildren complexGraph a
+ListChildren complexGraph b
+ListChildren complexGraph c
+ListChildren complexGraph d
+ListChildren complexGraph e
+ListChildren complexGraph f
+ListChildren complexGraph g

@@ -2,224 +2,235 @@ package hw5.test;
 
 import java.io.*;
 import java.util.*;
+import hw5.Graph;
+import hw5.Node;
+import hw5.Edge;
 
 /**
- * This class implements a testing driver which reads test scripts
- * from files for testing Graph.
+ * This class implements a testing driver which reads test scripts from files
+ * for testing Graph.
  **/
 public class HW5TestDriver {
 
-    public static void main(String args[]) {
-        try {
-            if (args.length > 1) {
-                printUsage();
-                return;
-            }
+	public static void main(String args[]) {
+		try {
+			if (args.length > 1) {
+				printUsage();
+				return;
+			}
 
-            HW5TestDriver td;
+			HW5TestDriver td;
 
-            if (args.length == 0) {
-                td = new HW5TestDriver(new InputStreamReader(System.in),
-                                       new OutputStreamWriter(System.out));
-            } else {
+			if (args.length == 0) {
+				td = new HW5TestDriver(new InputStreamReader(System.in), new OutputStreamWriter(System.out));
+			} else {
 
-                String fileName = args[0];
-                File tests = new File (fileName);
+				String fileName = args[0];
+				File tests = new File(fileName);
 
-                if (tests.exists() || tests.canRead()) {
-                    td = new HW5TestDriver(new FileReader(tests),
-                                           new OutputStreamWriter(System.out));
-                } else {
-                    System.err.println("Cannot read from " + tests.toString());
-                    printUsage();
-                    return;
-                }
-            }
+				if (tests.exists() || tests.canRead()) {
+					td = new HW5TestDriver(new FileReader(tests), new OutputStreamWriter(System.out));
+				} else {
+					System.err.println("Cannot read from " + tests.toString());
+					printUsage();
+					return;
+				}
+			}
 
-            td.runTests();
+			td.runTests();
 
-        } catch (IOException e) {
-            System.err.println(e.toString());
-            e.printStackTrace(System.err);
-        }
-    }
+		} catch (IOException e) {
+			System.err.println(e.toString());
+			e.printStackTrace(System.err);
+		}
+	}
 
-    private static void printUsage() {
-        System.err.println("Usage:");
-        System.err.println("to read from a file: java hw5.test.HW5TestDriver <name of input script>");
-        System.err.println("to read from standard in: java hw5.test.HW5TestDriver");
-    }
+	private static void printUsage() {
+		System.err.println("Usage:");
+		System.err.println("to read from a file: java hw5.test.HW5TestDriver <name of input script>");
+		System.err.println("to read from standard in: java hw5.test.HW5TestDriver");
+	}
 
-    /** String -> Graph: maps the names of graphs to the actual graph **/
-    //TODO for the student: Parameterize the next line correctly.
-    //private final Map<String, _______> graphs = new HashMap<String, ________>();
-    private final PrintWriter output;
-    private final BufferedReader input;
+	/** String -> Graph: maps the names of graphs to the actual graph **/
+	// TODO for the student: Parameterize the next line correctly.
+	private final Map<String, Graph> graphs = new HashMap<String, Graph>();
+	private final PrintWriter output;
+	private final BufferedReader input;
 
-    /**
-     * @requires r != null && w != null
-     *
-     * @effects Creates a new HW5TestDriver which reads command from
-     * <tt>r</tt> and writes results to <tt>w</tt>.
-     **/
-    public HW5TestDriver(Reader r, Writer w) {
-        input = new BufferedReader(r);
-        output = new PrintWriter(w);
-    }
+	/**
+	 * @requires r != null && w != null
+	 *
+	 * @effects Creates a new HW5TestDriver which reads command from <tt>r</tt>
+	 *          and writes results to <tt>w</tt>.
+	 **/
+	public HW5TestDriver(Reader r, Writer w) {
+		input = new BufferedReader(r);
+		output = new PrintWriter(w);
+	}
 
-    /**
-     * @effects Executes the commands read from the input and writes results to the output
-     * @throws IOException if the input or output sources encounter an IOException
-     **/
-    public void runTests()
-        throws IOException
-    {
-        String inputLine;
-        while ((inputLine = input.readLine()) != null) {
-            if ((inputLine.trim().length() == 0) ||
-                (inputLine.charAt(0) == '#')) {
-                // echo blank and comment lines
-                output.println(inputLine);
-            }
-            else
-            {
-                // separate the input line on white space
-                StringTokenizer st = new StringTokenizer(inputLine);
-                if (st.hasMoreTokens()) {
-                    String command = st.nextToken();
+	/**
+	 * @effects Executes the commands read from the input and writes results to
+	 *          the output
+	 * @throws IOException
+	 *             if the input or output sources encounter an IOException
+	 **/
+	public void runTests() throws IOException {
+		String inputLine;
+		while ((inputLine = input.readLine()) != null) {
+			if ((inputLine.trim().length() == 0) || (inputLine.charAt(0) == '#')) {
+				// echo blank and comment lines
+				output.println(inputLine);
+			} else {
+				// separate the input line on white space
+				StringTokenizer st = new StringTokenizer(inputLine);
+				if (st.hasMoreTokens()) {
+					String command = st.nextToken();
 
-                    List<String> arguments = new ArrayList<String>();
-                    while (st.hasMoreTokens()) {
-                        arguments.add(st.nextToken());
-                    }
+					List<String> arguments = new ArrayList<String>();
+					while (st.hasMoreTokens()) {
+						arguments.add(st.nextToken());
+					}
 
-                    executeCommand(command, arguments);
-                }
-            }
-            output.flush();
-        }
-    }
+					executeCommand(command, arguments);
+				}
+			}
+			output.flush();
+		}
+	}
 
-    private void executeCommand(String command, List<String> arguments) {
-        try {
-            if (command.equals("CreateGraph")) {
-                createGraph(arguments);
-            } else if (command.equals("AddNode")) {
-                addNode(arguments);
-            } else if (command.equals("AddEdge")) {
-                addEdge(arguments);
-            } else if (command.equals("ListNodes")) {
-                listNodes(arguments);
-            } else if (command.equals("ListChildren")) {
-                listChildren(arguments);
-            } else {
-                output.println("Unrecognized command: " + command);
-            }
-        } catch (Exception e) {
-            output.println("Exception: " + e.toString());
-        }
-    }
+	private void executeCommand(String command, List<String> arguments) {
+		try {
+			if (command.equals("CreateGraph")) {
+				createGraph(arguments);
+			} else if (command.equals("AddNode")) {
+				addNode(arguments);
+			} else if (command.equals("AddEdge")) {
+				addEdge(arguments);
+			} else if (command.equals("ListNodes")) {
+				listNodes(arguments);
+			} else if (command.equals("ListChildren")) {
+				listChildren(arguments);
+			} else {
+				output.println("Unrecognized command: " + command);
+			}
+		} catch (Exception e) {
+			output.println("Exception: " + e.toString());
+		}
+	}
 
-    private void createGraph(List<String> arguments) {
-        if (arguments.size() != 1) {
-            throw new CommandException("Bad arguments to CreateGraph: " + arguments);
-        }
+	private void createGraph(List<String> arguments) {
+		if (arguments.size() != 1) {
+			throw new CommandException("Bad arguments to CreateGraph: " + arguments);
+		}
 
-        String graphName = arguments.get(0);
-        createGraph(graphName);
-    }
+		String graphName = arguments.get(0);
+		createGraph(graphName);
+	}
 
-    private void createGraph(String graphName) {
-        // Insert your code here.
+	private void createGraph(String graphName) {
+		Graph g = new Graph();
 
-        // graphs.put(graphName, ___);
-        // output.println(...);
-    }
+		graphs.put(graphName, g);
+		output.println("created graph " + graphName);
+	}
 
-    private void addNode(List<String> arguments) {
-        if (arguments.size() != 2) {
-            throw new CommandException("Bad arguments to addNode: " + arguments);
-        }
+	private void addNode(List<String> arguments) {
+		if (arguments.size() != 2) {
+			throw new CommandException("Bad arguments to addNode: " + arguments);
+		}
 
-        String graphName = arguments.get(0);
-        String nodeName = arguments.get(1);
+		String graphName = arguments.get(0);
+		String nodeName = arguments.get(1);
 
-        addNode(graphName, nodeName);
-    }
+		addNode(graphName, nodeName);
+	}
 
-    private void addNode(String graphName, String nodeName) {
-        // Insert your code here.
+	private void addNode(String graphName, String nodeName) {
+		Graph g = graphs.get(graphName);
+		Node n = new Node(nodeName);
+		g.addNode(n);
+		output.println("added node " + nodeName + " to " + graphName);
+	}
 
-        // ___ = graphs.get(graphName);
-        // output.println(...);
-    }
+	private void addEdge(List<String> arguments) {
+		if (arguments.size() != 4) {
+			throw new CommandException("Bad arguments to addEdge: " + arguments);
+		}
 
-    private void addEdge(List<String> arguments) {
-        if (arguments.size() != 4) {
-            throw new CommandException("Bad arguments to addEdge: " + arguments);
-        }
+		String graphName = arguments.get(0);
+		String parentName = arguments.get(1);
+		String childName = arguments.get(2);
+		String edgeLabel = arguments.get(3);
 
-        String graphName = arguments.get(0);
-        String parentName = arguments.get(1);
-        String childName = arguments.get(2);
-        String edgeLabel = arguments.get(3);
+		addEdge(graphName, parentName, childName, edgeLabel);
+	}
 
-        addEdge(graphName, parentName, childName, edgeLabel);
-    }
+	private void addEdge(String graphName, String parentName, String childName, String edgeLabel) {
 
-    private void addEdge(String graphName, String parentName, String childName,
-            String edgeLabel) {
-        // Insert your code here.
+		Graph g = graphs.get(graphName);
+		Node child = new Node(childName);
+		Node parent = new Node(parentName);
+		Edge e = new Edge(child, edgeLabel);
 
-        // ___ = graphs.get(graphName);
-        // output.println(...);
-    }
+		g.addEdge(parent, e);
+		output.println("added edge " + edgeLabel + " from " + parentName + " to " + childName + " in " + graphName);
+	}
 
-    private void listNodes(List<String> arguments) {
-        if (arguments.size() != 1) {
-            throw new CommandException("Bad arguments to listNodes: " + arguments);
-        }
+	private void listNodes(List<String> arguments) {
+		if (arguments.size() != 1) {
+			throw new CommandException("Bad arguments to listNodes: " + arguments);
+		}
 
-        String graphName = arguments.get(0);
-        listNodes(graphName);
-    }
+		String graphName = arguments.get(0);
+		listNodes(graphName);
+	}
 
-    private void listNodes(String graphName) {
-        // Insert your code here.
+	private void listNodes(String graphName) {
 
-        // ___ = graphs.get(graphName);
-        // output.println(...);
-    }
+		Graph g = graphs.get(graphName);
+		Set<Node> nodes = g.getNodes();
+		output.print(graphName + " contains:");
+		for (Node n : nodes) {
+			output.print(" " + n.getData());
+		}
+		output.println();
+	}
 
-    private void listChildren(List<String> arguments) {
-        if (arguments.size() != 2) {
-            throw new CommandException("Bad arguments to listChildren: " + arguments);
-        }
+	private void listChildren(List<String> arguments) {
+		if (arguments.size() != 2) {
+			throw new CommandException("Bad arguments to listChildren: " + arguments);
+		}
 
-        String graphName = arguments.get(0);
-        String parentName = arguments.get(1);
-        listChildren(graphName, parentName);
-    }
+		String graphName = arguments.get(0);
+		String parentName = arguments.get(1);
+		listChildren(graphName, parentName);
+	}
 
-    private void listChildren(String graphName, String parentName) {
-        // Insert your code here.
+	private void listChildren(String graphName, String parentName) {
 
-        // ___ = graphs.get(graphName);
-        // output.println(...);
-    }
+		Graph g = graphs.get(graphName);
+		Node n = new Node(parentName);
+		Set<Edge> edges = g.getOutgoingEdges(n);
+		output.print("the children of " + parentName + " in " + graphName + " are:");
+		for(Edge e : edges){
+			output.print(" " + e.getChild().getData() + "(" + e.getLabel() + ")");
+		}
+		output.println();
+	}
 
-    /**
-     * This exception results when the input file cannot be parsed properly
-     **/
-    static class CommandException extends RuntimeException {
+	/**
+	 * This exception results when the input file cannot be parsed properly
+	 **/
+	static class CommandException extends RuntimeException {
 
-        public CommandException() {
-            super();
-        }
-        public CommandException(String s) {
-            super(s);
-        }
+		public CommandException() {
+			super();
+		}
 
-        public static final long serialVersionUID = 3495;
-    }
+		public CommandException(String s) {
+			super(s);
+		}
+
+		public static final long serialVersionUID = 3495;
+	}
 }

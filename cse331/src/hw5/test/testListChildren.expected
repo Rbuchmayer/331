@@ -1,0 +1,45 @@
+created graph empty
+created graph oneNode
+created graph oneNodeOneEdge
+created graph twoNodesTwoEdges
+created graph twoNodesTwoOppositeEdges
+created graph complexGraph
+added node n1 to oneNode
+added node n2 to oneNodeOneEdge
+added edge e1 from n2 to n2 in oneNodeOneEdge 
+added node n3 to twoNodesTwoEdges
+added node n4 to twoNodesTwoEdges
+added edge e2 from n3 to n4 in twoNodesTwoEdges
+added edge e3 from n3 to n4 in twoNodesTwoEdges
+added node n5 to twoNodesTwoOppositeEdges
+added node n6 to twoNodesTwoOppositeEdges
+added edge e4 from n5 to n6 in twoNodesTwoOppositeEdges
+added edge e5 from n6 to n5 in twoNodesTwoOppositeEdges
+added node f to complexGraph
+added node b to complexGraph
+added node c to complexGraph
+added node d to complexGraph
+added node e to complexGraph
+added node a to complexGraph
+added node g to complexGraph
+added edge ab from a to b in complexGraph
+added edge fb from f to b in complexGraph
+added edge gf from g to f in complexGraph
+added edge ee from e to e in complexGraph
+added edge ec from e to c in complexGraph
+added edge bg from b to g in complexGraph
+added edge gc from g to c in complexGraph
+added edge gg from g to g in complexGraph
+the children of n1 in oneNode are:
+the children of n2 in oneNodeOneEdge are: n2(e1)
+the children of n3 in twoNodesTwoEdges are: n4(e2) n4(e3)
+the children of n4 in twoNodesTwoEdges are:
+the children of n5 in twoNodesTwoOppositeEdges are: n6(e4)
+the children of n6 in twoNodesTwoOppositeEdges are: n5(e5)
+the children of a in complexGraph are: b(ab)
+the children of b in complexGraph are: g(bg)
+the children of c in complexGraph are:
+the children of d in complexGraph are:
+the children of e in complexGraph are: c(ec) e(ee)
+the children of f in complexGraph are: b(fb)
+the children of g in complexGraph are: c(gc) f(gf) g(gg)

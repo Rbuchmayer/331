@@ -1,0 +1,12 @@
+CreateGraph g
+AddNode g n1
+AddNode g n2
+AddNode g n3
+AddNode g n4
+AddEdge g n1 n1 e1
+AddEdge g n1 n2 e2
+AddEdge g n3 n1 e3
+AddEdge g n3 n1 e3
+AddEdge g n1 n4 e4
+AddEdge g n4 n4 e1
+AddEdge g n4 n4 e1

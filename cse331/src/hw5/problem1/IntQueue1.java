@@ -8,7 +8,7 @@ import java.util.List;
  * for Integers.
  * <p>
  *
- * An IntQueue can be described as [n1, n2, ..., n_k], where n1 is the
+ * An IntQueue can be described as, where n1 is the
  * least-recently-added item in the queue and is the next item to be
  * removed.  n_k is the most-recently-added and will be the last of the
  * current elements to be removed.

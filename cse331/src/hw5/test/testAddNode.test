@@ -1,0 +1,12 @@
+CreateGraph g
+AddNode g n1
+AddNode g n2
+AddNode g n3
+AddNode g n4
+AddNode g n1
+AddNode g n1
+AddNode g n2
+CreateGraph h
+AddNode h n1
+AddNode h n3
+AddNode h node

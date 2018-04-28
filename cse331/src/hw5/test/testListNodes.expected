@@ -1,0 +1,38 @@
+created graph empty
+created graph oneNode
+created graph oneNodeOneEdge
+created graph twoNodesTwoEdges
+created graph twoNodesTwoOppositeEdges
+created graph complexGraph
+added node n1 to oneNode
+added node n2 to oneNodeOneEdge
+added edge e1 from n2 to n2 in oneNodeOneEdge 
+added node n3 to twoNodesTwoEdges
+added node n4 to twoNodesTwoEdges
+added edge e2 from n3 to n4 in twoNodesTwoEdges
+added edge e3 from n3 to n4 in twoNodesTwoEdges
+added node n5 to twoNodesTwoOppositeEdges
+added node n6 to twoNodesTwoOppositeEdges
+added edge e4 from n5 to n6 in twoNodesTwoOppositeEdges
+added edge e5 from n6 to n5 in twoNodesTwoOppositeEdges
+added node f to complexGraph
+added node b to complexGraph
+added node c to complexGraph
+added node d to complexGraph
+added node e to complexGraph
+added node a to complexGraph
+added node g to complexGraph
+added edge ab from a to b in complexGraph
+added edge fb from f to b in complexGraph
+added edge gf from g to f in complexGraph
+added edge ee from e to e in complexGraph
+added edge ec from e to c in complexGraph
+added edge bg from b to g in complexGraph
+added edge gc from g to c in complexGraph
+added edge gg from g to g in complexGraph
+empty contains:
+oneNode contains: n1
+oneNodeOneEdge contains: n2
+twoNodesTwoEdges contains: n3 n4
+twoNodesTwoOppositeEdges contains: n5 n6
+complexGraph contains: a b c d e f g
