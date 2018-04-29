@@ -222,13 +222,13 @@ public class Graph {
 		}
 		Set<Edge> xEdges = this.map.get(x);
 		for (Edge e : xEdges) {
-			if (e.getChild() == y) {
+			if (e.getChild().equals(y)) {
 				return true;
 			}
 		}
 		Set<Edge> yEdges = this.map.get(y);
 		for (Edge e : yEdges) {
-			if (e.getChild() == x) {
+			if (e.getChild().equals(x)) {
 				return true;
 			}
 		}
