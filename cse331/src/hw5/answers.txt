@@ -32,8 +32,8 @@ Problem 1. (Written exercises)
 	   returns a primitive int and no evidence of how
 	   it was computed.
 	   
-	2) This could expose representation because it returns a string list
-	   to the client, who could do whatever they want with it, including mutation.
+	2) This could expose representation because it returns a mutable string list
+	   to the client, who could do whatever they want with it.
 	   
 	3) This will not expose representation because the method is private,
        so it can never be used by a client.
@@ -42,7 +42,7 @@ Problem 1. (Written exercises)
        one immutable string that represents our object however we want to.
        
     5) If the iterator does not refer to a copy of our object, this could expose 
-       representation because we are returning an iterator that references our collection 
+       representation because we are returning an iterator that references to our collection 
        of ints. The client can do whatever they want with it, like remove or add an int.
        
     6) If the Deck constructor makes a deep copy of the list and all the cards in 
@@ -109,9 +109,10 @@ Problem 3.  (Testing strategy)
 		not expect
 
 Problem 4.  (Representation)
+
 	I used a HashMap to represent my Graph. It maps a Node to a Set<Edge> of outgoing Edges. I chose 
-	this because it makes sense to me and HashMap is more efficient than TreeMap. An advantage of using
-	a collection of Edges is that you can quickly see which Nodes are connected and the runtime of adding
-	or removing an Edge would be very fast. An advantage of an adjacency matrix is fast runtime for 
-	checking if an edge exists and adding/removing edges.
+	this because it makes sense to me and HashMap is more efficient than TreeMap. I also am comfortable 
+	using maps. An advantage of using a collection of Edges is that you can quickly see which Nodes are 
+	connected and the runtime of adding or removing an Edge would be very fast. An advantage of an adjacency 
+	matrix is fast runtime for checking if an edge exists and adding/removing edges.
 

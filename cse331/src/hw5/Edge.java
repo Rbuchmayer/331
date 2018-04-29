@@ -101,7 +101,7 @@ public final class Edge implements Comparable<Edge> {
 	public boolean equals(Object o) {
 		if (o instanceof Edge) {
 			Edge e = (Edge) o;
-			return this.getChild() == e.getChild() && this.getLabel().equals(e.getLabel());
+			return this.getChild().equals(e.getChild()) && this.getLabel().equals(e.getLabel());
 		}
 		return false;
 	}
