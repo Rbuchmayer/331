@@ -147,8 +147,7 @@ public class HW5TestDriver {
 
 	private void addNode(String graphName, String nodeName) {
 		Graph g = graphs.get(graphName);
-		Node n = new Node(nodeName);
-		g.addNode(n);
+		g.addNode(nodeName);
 		output.println("added node " + nodeName + " to " + graphName);
 	}
 
@@ -168,11 +167,9 @@ public class HW5TestDriver {
 	private void addEdge(String graphName, String parentName, String childName, String edgeLabel) {
 
 		Graph g = graphs.get(graphName);
-		Node child = new Node(childName);
-		Node parent = new Node(parentName);
-		Edge e = new Edge(child, edgeLabel);
+		Edge e = new Edge(childName, edgeLabel);
 
-		g.addEdge(parent, e);
+		g.addEdge(parentName, e);
 		output.println("added edge " + edgeLabel + " from " + parentName + " to " + childName + " in " + graphName);
 	}
 
@@ -188,10 +185,10 @@ public class HW5TestDriver {
 	private void listNodes(String graphName) {
 
 		Graph g = graphs.get(graphName);
-		Set<Node> nodes = g.getNodes();
+		Set<String> nodes = g.getNodes();
 		output.print(graphName + " contains:");
-		for (Node n : nodes) {
-			output.print(" " + n.getData());
+		for (String n : nodes) {
+			output.print(" " + n);
 		}
 		output.println();
 	}
@@ -209,11 +206,10 @@ public class HW5TestDriver {
 	private void listChildren(String graphName, String parentName) {
 
 		Graph g = graphs.get(graphName);
-		Node n = new Node(parentName);
-		Set<Edge> edges = g.getOutgoingEdges(n);
+		Set<Edge> edges = g.getOutgoingEdges(parentName);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
 		for(Edge e : edges){
-			output.print(" " + e.getChild().getData() + "(" + e.getLabel() + ")");
+			output.print(" " + e.getChild() + "(" + e.getLabel() + ")");
 		}
 		output.println();
 	}

@@ -5,8 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import hw3.Ball;
-
 /**
  * <b>RatPoly</b> represents an immutable single-variate polynomial expression.
  * RatPolys are sums of RatTerms with non-negative exponents.

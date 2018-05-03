@@ -7,15 +7,14 @@ import java.util.*;
  * made of Nodes and Edges.
  * 
  * <p>
- * Some examples of Graphs are: "{Node Data: n1=[]}", "{Node Data: n2=[Edge
- * Label: e1, Child Node: n2]}", and "{Node Data: n3=[Edge Label: e2, Child
- * Node: n3]}"
+ * Some examples of Graphs are: "{n1=[]}", "{n2=[Edge Label: e1, Child Node:
+ * n2]}", and "{n3=[Edge Label: e2, Child Node: n3]}"
  */
 
 public class Graph {
 
 	/** Holds all the Nodes and Edges in the Graph */
-	private Map<Node, Set<Edge>> map;
+	private Map<String, Set<Edge>> map;
 
 	/*
 	 * Abstraction Function: Graph, g, represents a directed, labeled,
@@ -31,13 +30,13 @@ public class Graph {
 	 * null. Also, every Edge's child Node is contained in the Graph
 	 */
 
-	private final static boolean DEBUG = false;
+	private final static boolean DEBUG = true;
 
 	/**
 	 * Constructs an empty Graph
 	 */
 	public Graph() {
-		map = new HashMap<Node, Set<Edge>>();
+		map = new HashMap<String, Set<Edge>>();
 		checkRep();
 	}
 
@@ -57,8 +56,8 @@ public class Graph {
 	 */
 	public int totalEdges() {
 		int total = 0;
-		for (Node n : this.map.keySet()) {
-			total += this.map.get(n).size();
+		for (String s : this.map.keySet()) {
+			total += this.map.get(s).size();
 		}
 		return total;
 	}
@@ -73,15 +72,17 @@ public class Graph {
 	}
 
 	/**
-	 * Returns true if a given Node is contained in this Graph
+	 * Returns true if a Node that holds <var>data<var> is contained in this
+	 * Graph
 	 * 
-	 * @param node
-	 *            Node to be checked
-	 * @requires node != null
-	 * @return true if node is in the Graph, false otherwise
+	 * @param data
+	 *            data to be looked for in this Graph
+	 * @requires data != null
+	 * @return true if a Node containing <var>data<var> is in the Graph, false
+	 *         otherwise
 	 */
-	public boolean conatins(Node node) {
-		return this.map.containsKey(node);
+	public boolean conatins(String data) {
+		return this.map.containsKey(data);
 	}
 
 	/**
@@ -108,40 +109,42 @@ public class Graph {
 	 * Adds a Node with no Edges to this Graph. If the node is already in the
 	 * Graph, all its outgoing edges will be removed.
 	 * 
-	 * @param node
-	 *            Node to be added to this Graph
-	 * @requires node != null
+	 * @param data
+	 *            the data of the Node to be added to this Graph
+	 * @requires data != null
 	 * @modifies this
-	 * @effects Adds node with no Edges to this Graph. Removes all its outgoing
-	 *          Edges if the Node is already in the Graph.
+	 * @effects Adds Node holding <var>data<var> with no Edges to this Graph.
+	 *          Removes all its outgoing Edges if the Node is already in the
+	 *          Graph.
 	 */
-	public void addNode(Node node) {
-		this.map.put(node, new HashSet<Edge>());
+	public void addNode(String data) {
+		this.map.put(data, new HashSet<Edge>());
 		checkRep();
 	}
 
 	/**
-	 * Removes a Node from this Graph. All Edges connected to the Node will be
-	 * removed. If the node is not in the Graph, there will be no effect.
+	 * Removes a the Node holding <var>data<var> from this Graph. All Edges
+	 * connected to the Node will be removed. If the Node is not in the Graph,
+	 * there will be no effect.
 	 * 
-	 * @param node
-	 *            Node to be removed from this Graph
-	 * @requires node != null
+	 * @param data
+	 *            Data of the Node to be removed from this Graph
+	 * @requires data != null
 	 * @modifies this
-	 * @effects Removes node from this Graph. Removes all Edges that the Node
-	 *          was the parent or child of. No effect if node is not in the
-	 *          Graph to begin with.
+	 * @effects Removes the Node holding <var>data<var> from this Graph. Removes
+	 *          all Edges that the Node was the parent or child of. No effect if
+	 *          the Node is not in the Graph to begin with.
 	 */
-	public void removeNode(Node node) {
-		this.map.remove(node);
-		for (Node n : this.map.keySet()) {
+	public void removeNode(String data) {
+		this.map.remove(data);
+		for (String s : this.map.keySet()) {
 			Set<Edge> toRemove = new HashSet<Edge>();
-			for (Edge e : this.map.get(n)) {
-				if (e.getChild().equals(node)) {
+			for (Edge e : this.map.get(s)) {
+				if (e.getChild().equals(data)) {
 					toRemove.add(e);
 				}
 			}
-			this.map.get(n).removeAll(toRemove);
+			this.map.get(s).removeAll(toRemove);
 		}
 		checkRep();
 	}
@@ -161,14 +164,13 @@ public class Graph {
 	 * @throws IllegalArgumentException
 	 *             if parent or edge.getChild() is not contained in the Graph
 	 */
-	public void addEdge(Node parent, Edge edge) {
+	public void addEdge(String parent, Edge edge) {
 		if (!this.map.containsKey(parent) || !this.map.containsKey(edge.getChild())) {
 			throw new IllegalArgumentException("One argument is not in the Graph");
 		}
 		Set<Edge> edges = this.map.get(parent);
 		edges.add(edge);
-		this.map.put(parent, edges);
-		checkRep();
+
 	}
 
 	/**
@@ -187,7 +189,7 @@ public class Graph {
 	 * @throws IllegalArgumentException
 	 *             if parent or child is not contained in this Graph
 	 */
-	public void removeEdge(Node parent, Node child, String label) {
+	public void removeEdge(String parent, String child, String label) {
 		if (!this.map.containsKey(parent) || !this.map.containsKey(child)) {
 			throw new IllegalArgumentException("One argument is not in the Graph");
 		}
@@ -199,7 +201,6 @@ public class Graph {
 			}
 		}
 		edges.removeAll(toRemove);
-		this.map.put(parent, edges);
 		checkRep();
 	}
 
@@ -208,15 +209,17 @@ public class Graph {
 	 * are connected by an edge in either direction.
 	 * 
 	 * @param x
-	 *            First Node
+	 *            First Node's data
 	 * @param y
-	 *            Second Node
+	 *            Second Node's data
 	 * @requires x != null and y != null
-	 * @return true if x and y are connected by an edge, false otherwise
+	 * @return true if Node holding x and Node holding y are connected by an
+	 *         edge, false otherwise
 	 * @throws IllegalArgumentException
-	 *             if x or y is not contained in this Graph
+	 *             if Node holding x or Node holding y is not contained in this
+	 *             Graph
 	 */
-	public boolean adjacent(Node x, Node y) {
+	public boolean adjacent(String x, String y) {
 		if (!this.map.containsKey(x) || !this.map.containsKey(y)) {
 			throw new IllegalArgumentException("One argument is not in the Graph");
 		}
@@ -239,13 +242,13 @@ public class Graph {
 	 * Returns a set of all the outgoing Edges of a Node.
 	 * 
 	 * @param node
-	 *            Node to get outgoing Edges from
-	 * @requires node != null
+	 *            Data of the Node to get outgoing Edges from
+	 * @requires data != null
 	 * @return a Set of type Edge that contains all the outgoing Edges of node
 	 * @throws IllegalArgumentException
 	 *             if node is not contained in this Graph
 	 */
-	public Set<Edge> getOutgoingEdges(Node node) {
+	public Set<Edge> getOutgoingEdges(String node) {
 		if (!this.map.containsKey(node)) {
 			throw new IllegalArgumentException("The node is not in the Graph");
 		}
@@ -257,10 +260,11 @@ public class Graph {
 	/**
 	 * Returns a set of all the Nodes in this Graph
 	 * 
-	 * @return a Set of type Node containing all the Nodes in this Graph
+	 * @return a Set of Strings that represent the data of every Node in this
+	 *         Graph
 	 */
-	public Set<Node> getNodes() {
-		Set<Node> result = new TreeSet<Node>();
+	public Set<String> getNodes() {
+		Set<String> result = new TreeSet<String>();
 		result.addAll(this.map.keySet());
 		return result;
 	}
@@ -270,8 +274,8 @@ public class Graph {
 		if (DEBUG) {
 			assert (this != null) : "this cannot be null";
 			assert (this.map != null) : "this.map cannot be null";
-			Set<Node> keys = this.map.keySet();
-			for (Node k : keys) {
+			Set<String> keys = this.map.keySet();
+			for (String k : keys) {
 				assert (k != null) : "Null Node Found";
 				for (Edge e : this.map.get(k)) {
 					assert (e != null) : "Null Edge Found";

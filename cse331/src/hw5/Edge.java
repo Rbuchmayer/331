@@ -5,13 +5,13 @@ package hw5;
  * to connect Nodes in a Graph.
  * <p>
  * 
- * One example of an Edge might be: "Edge Label: e1, Child Node: n1"
+ * One example of an Edge might be: "e1 pointing to n1"
  */
 
 public final class Edge implements Comparable<Edge> {
 
 	/** Holds the child Node of this Edge */
-	private final Node child;
+	private final String child;
 
 	/** Holds the label of this Edge */
 	private final String label;
@@ -34,18 +34,18 @@ public final class Edge implements Comparable<Edge> {
 	 *            The label of this Edge
 	 * @requires child != null and label != null
 	 */
-	public Edge(Node child, String label) {
+	public Edge(String child, String label) {
 		this.child = child;
 		this.label = label;
 		checkRep();
 	}
 
 	/**
-	 * Gets the child Node of this Edge
+	 * Gets the data of this Edge's child Node.
 	 * 
-	 * @return the child Node of the this Edge
+	 * @return the data held by the child Node of the this Edge
 	 */
-	public Node getChild() {
+	public String getChild() {
 		return this.child;
 	}
 
@@ -65,12 +65,12 @@ public final class Edge implements Comparable<Edge> {
 	 *         child Node
 	 */
 	public String toString() {
-		return ("Edge Label: " + this.getLabel() + ", Child Node: " + this.getChild().getData());
+		return (this.getLabel() + " pointing to " + this.getChild());
 	}
 
 	/**
-	 * Compares two Edges first by child Node, then alphabetically by label if
-	 * the child Nodes are equal
+	 * Compares two Edges first by child Node data (alphabetically), then by
+	 * label (alphabetically) if the child Nodes are equal.
 	 * 
 	 * @param e
 	 *            Edge to be compared to this

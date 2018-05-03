@@ -8,22 +8,22 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 
 public final class GraphTests {
-	
+
 	// Some basic Nodes
-	private Node n1 = new Node("n1");
-	private Node n2 = new Node("n2");
-	private Node n3 = new Node("n3");
-	private Node n4 = new Node("n4");
-	private Node n5 = new Node("n5");
-	private Node n6 = new Node("n6");
-	private Node n7 = new Node("n7");
-	private Node n8 = new Node("n8");
-	private Node n9 = new Node("n9");
-	private Node n10 = new Node("n10");
-	private Node n11 = new Node("n11");
-	private Node n12 = new Node("n12");
-	private Node n13 = new Node("n13");
-	private Node n14 = new Node("n14");
+	private String n1 = "n1";
+	private String n2 = "n2";
+	private String n3 = "n3";
+	private String n4 = "n4";
+	private String n5 = "n5";
+	private String n6 = "n6";
+	private String n7 = "n7";
+	private String n8 = "n8";
+	private String n9 = "n9";
+	private String n10 = "n10";
+	private String n11 = "n11";
+	private String n12 = "n12";
+	private String n13 = "n13";
+	private String n14 = "n14";
 
 	// Some basic Graphs
 	Graph EMPTY;
@@ -164,7 +164,7 @@ public final class GraphTests {
 		assertTrue(g7.conatins(n12));
 		assertTrue(g7.conatins(n13));
 	}
-	
+
 	@Test
 	public void testContainsWhenFalse() {
 		assertFalse(EMPTY.conatins(n1));
@@ -182,19 +182,20 @@ public final class GraphTests {
 
 	@Test
 	public void testToStringOneNode() {
-		assertEquals(g1.toString(), "{Node Data: n1=[]}");
-		assertEquals(g2.toString(), "{Node Data: n2=[Edge Label: e1, Child Node: n2]}");
+		assertEquals(g1.toString(), "{n1=[]}");
+		assertEquals(g2.toString(), "{n2=[Edge Label: e1, Child Node: n2]}");
 	}
 
 	@Test
 	public void testToStringMultiNode() {
-		assertEquals(g6.toString(), "{Node Data: n9=[Edge Label: e5, Child Node: n10, "
-				+ "Edge Label: e6, Child Node: n10], Node Data: n10=[]}");
+		assertEquals(g6.toString(),
+				"{n9=[Edge Label: e5, Child Node: n10, " + "Edge Label: e6, Child Node: n10], n10=[]}");
 
+		System.out.println(g7.toString());
 		assertEquals(g7.toString(),
-				"{Node Data: n11=[Edge Label: e7, Child Node: n11, Edge Label: e8, Child Node: n12], "
-						+ "Node Data: n12=[Edge Label: e9, Child Node: n13], Node Data: n13=[Edge Label: e10, "
-						+ "Child Node: n11, Edge Label: e11, Child Node: n12]}");
+				"{n13=[Edge Label: e10, Child Node: n11, Edge Label: e11, Child Node: n12], "
+						+ "n12=[Edge Label: e9, Child Node: n13], n11=[Edge Label: e7, "
+						+ "Child Node: n11, Edge Label: e8, Child Node: n12]}");
 	}
 
 	// Clear Tests
@@ -223,7 +224,7 @@ public final class GraphTests {
 		g7.addNode(n9);
 		assertTrue(g7.conatins(n9));
 	}
-	
+
 	@Test
 	public void testAddDuplicateNode() {
 		g7.addNode(n13);
@@ -369,21 +370,21 @@ public final class GraphTests {
 		assertSame(EMPTY.getOutgoingEdges(n1), 0);
 		assertSame(g4.getOutgoingEdges(n7), 0);
 	}
-	
+
 	// getNodes Tests
-	@Test 
-	public void testGetNodesNoNodes(){
+	@Test
+	public void testGetNodesNoNodes() {
 		assertTrue(EMPTY.getNodes().isEmpty());
 	}
-	
-	@Test 
-	public void testGetNodesOneNode(){
+
+	@Test
+	public void testGetNodesOneNode() {
 		assertSame(g1.getNodes().size(), 1);
 		assertSame(g2.getNodes().size(), 1);
 	}
-	
-	@Test 
-	public void testGetNodesMultiNodes(){
+
+	@Test
+	public void testGetNodesMultiNodes() {
 		assertSame(g7.getNodes().size(), 3);
 		assertSame(g4.getNodes().size(), 2);
 		assertSame(g3.getNodes().size(), 2);

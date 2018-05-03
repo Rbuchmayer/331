@@ -10,20 +10,13 @@ import org.junit.Before;
 
 public final class EdgeTests {
 
-	// Some basic Nodes
-	private Node n1 = new Node("n1");
-	private Node n2 = new Node("n2");
-	private Node n3 = new Node("n3");
-	private Node n4 = new Node("n4");
-	private Node n5 = new Node("n4");
-
 	// Some basic Edges
-	private Edge e1 = new Edge(n1, "e1");
-	private Edge e2 = new Edge(n2, "e2");
-	private Edge e3 = new Edge(n3, "e3");
-	private Edge e4 = new Edge(n4, "e4");
-	private Edge e5 = new Edge(n1, "e5");
-	private Edge e6 = new Edge(n2, "e2");
+	private Edge e1 = new Edge("n1", "e1");
+	private Edge e2 = new Edge("n2", "e2");
+	private Edge e3 = new Edge("n3", "e3");
+	private Edge e4 = new Edge("n4", "e4");
+	private Edge e5 = new Edge("n1", "e5");
+	private Edge e6 = new Edge("n2", "e2");
 
 	@Before
 	public void testAssertsEnabled() {
@@ -33,18 +26,18 @@ public final class EdgeTests {
 	// Constructor Tests
 	@Test
 	public void testConstructor() {
-		new Edge(n1, "e1");
-		new Edge(n2, "e1");
-		new Edge(n1, "e2");
-		new Edge(n4, "e1");
+		new Edge("n1", "e1");
+		new Edge("n2", "e1");
+		new Edge("n1", "e2");
+		new Edge("n4", "e1");
 	}
 
 	// getChild Tests
 	@Test
 	public void testGetChild() {
-		assertEquals(e1.getChild(), n1);
-		assertEquals(e2.getChild(), n2);
-		assertNotEquals(e3.getChild(), n4);
+		assertEquals(e1.getChild(), "n1");
+		assertEquals(e2.getChild(), "n2");
+		assertNotEquals(e3.getChild(), "n4");
 		assertEquals(e5.getChild(), e1.getChild());
 	}
 
@@ -93,7 +86,7 @@ public final class EdgeTests {
 	// hashCode Tests
 	@Test
 	public void testHashCodeOnEqualEdges() {
-		assertSame(n4.hashCode(), n4.hashCode());
-		assertSame(n5.hashCode(), n4.hashCode());
+		assertSame(e4.hashCode(), e4.hashCode());
+		assertSame(e5.hashCode(), e4.hashCode());
 	}
 }
