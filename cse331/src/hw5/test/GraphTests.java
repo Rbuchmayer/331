@@ -150,28 +150,28 @@ public final class GraphTests {
 	// Contains Tests
 	@Test
 	public void testContainsWhenTrue() {
-		assertTrue(g1.conatins(n1));
-		assertTrue(g2.conatins(n2));
-		assertTrue(g3.conatins(n3));
-		assertTrue(g3.conatins(n4));
-		assertTrue(g4.conatins(n5));
-		assertTrue(g4.conatins(n6));
-		assertTrue(g5.conatins(n7));
-		assertTrue(g5.conatins(n8));
-		assertTrue(g6.conatins(n9));
-		assertTrue(g6.conatins(n10));
-		assertTrue(g7.conatins(n11));
-		assertTrue(g7.conatins(n12));
-		assertTrue(g7.conatins(n13));
+		assertTrue(g1.contains(n1));
+		assertTrue(g2.contains(n2));
+		assertTrue(g3.contains(n3));
+		assertTrue(g3.contains(n4));
+		assertTrue(g4.contains(n5));
+		assertTrue(g4.contains(n6));
+		assertTrue(g5.contains(n7));
+		assertTrue(g5.contains(n8));
+		assertTrue(g6.contains(n9));
+		assertTrue(g6.contains(n10));
+		assertTrue(g7.contains(n11));
+		assertTrue(g7.contains(n12));
+		assertTrue(g7.contains(n13));
 	}
 
 	@Test
 	public void testContainsWhenFalse() {
-		assertFalse(EMPTY.conatins(n1));
-		assertFalse(g6.conatins(n3));
-		assertFalse(g3.conatins(n2));
-		assertFalse(g7.conatins(n8));
-		assertFalse(g1.conatins(n2));
+		assertFalse(EMPTY.contains(n1));
+		assertFalse(g6.contains(n3));
+		assertFalse(g3.contains(n2));
+		assertFalse(g7.contains(n8));
+		assertFalse(g1.contains(n2));
 	}
 
 	// toString Tests
@@ -183,19 +183,18 @@ public final class GraphTests {
 	@Test
 	public void testToStringOneNode() {
 		assertEquals(g1.toString(), "{n1=[]}");
-		assertEquals(g2.toString(), "{n2=[Edge Label: e1, Child Node: n2]}");
+		assertEquals(g2.toString(), "{n2=[e1 pointing to n2]}");
 	}
 
 	@Test
 	public void testToStringMultiNode() {
 		assertEquals(g6.toString(),
-				"{n9=[Edge Label: e5, Child Node: n10, " + "Edge Label: e6, Child Node: n10], n10=[]}");
+				"{n9=[e5 pointing to n10, " + "e6 pointing to n10], n10=[]}");
 
 		System.out.println(g7.toString());
 		assertEquals(g7.toString(),
-				"{n13=[Edge Label: e10, Child Node: n11, Edge Label: e11, Child Node: n12], "
-						+ "n12=[Edge Label: e9, Child Node: n13], n11=[Edge Label: e7, "
-						+ "Child Node: n11, Edge Label: e8, Child Node: n12]}");
+				"{n13=[e10 pointing to n11, e11 pointing to n12], "
+						+ "n12=[e9 pointing to n13], n11=[e7 pointing to n11, e8 pointing to n12]}");
 	}
 
 	// Clear Tests
@@ -212,24 +211,24 @@ public final class GraphTests {
 	public void testAddNodeToEmpty() {
 		EMPTY.addNode(n14);
 		assertFalse(EMPTY.isEmpty());
-		assertTrue(EMPTY.conatins(n14));
+		assertTrue(EMPTY.contains(n14));
 	}
 
 	@Test
 	public void testAddNodeToNonEmpty() {
 		g1.addNode(n11);
-		assertTrue(g1.conatins(n11));
+		assertTrue(g1.contains(n11));
 		g5.addNode(n10);
-		assertTrue(g5.conatins(n10));
+		assertTrue(g5.contains(n10));
 		g7.addNode(n9);
-		assertTrue(g7.conatins(n9));
+		assertTrue(g7.contains(n9));
 	}
 
 	@Test
 	public void testAddDuplicateNode() {
 		g7.addNode(n13);
 		assertSame(g7.totalEdges(), 3);
-		assertTrue(g7.conatins(n13));
+		assertTrue(g7.contains(n13));
 		assertTrue(g7.getOutgoingEdges(n13).isEmpty());
 	}
 
@@ -243,7 +242,7 @@ public final class GraphTests {
 	@Test
 	public void testRemoveNodeFromOneNodeGraph() {
 		g1.removeNode(n1);
-		assertFalse(g1.conatins(n1));
+		assertFalse(g1.contains(n1));
 		assertTrue(g1.isEmpty());
 	}
 
@@ -251,18 +250,18 @@ public final class GraphTests {
 	public void testRemoveNodeFromMultiNodeGraph() {
 		g7.removeNode(n13);
 		assertSame(g7.totalEdges(), 2);
-		assertFalse(g7.conatins(n13));
+		assertFalse(g7.contains(n13));
 		assertSame(g7.size(), 2);
 		g7.removeNode(n12);
 		assertSame(g7.totalEdges(), 1);
 		assertSame(g7.size(), 1);
 		assertSame(g7.getOutgoingEdges(n11).size(), 1);
 		g3.removeNode(n4);
-		assertFalse(g7.conatins(n4));
+		assertFalse(g7.contains(n4));
 		assertSame(g3.size(), 1);
 		g6.removeNode(n10);
 		assertTrue(g6.getOutgoingEdges(n9).isEmpty());
-		assertFalse(g6.conatins(n10));
+		assertFalse(g6.contains(n10));
 	}
 
 	// addEdge Tests

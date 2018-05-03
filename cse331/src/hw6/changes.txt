@@ -1,8 +1,13 @@
 CSE 331 Homework 6.  Answers to Written questions.
 Edit this file to supply your answers.
 
-Name:  <replace this with your name>
+Name:  Ryan Buchmayer
 
 Briefly describe any changes made to your Graph ADT from HW5 and why 
 those changes were made below.  (See the HW6 assignment for details.)
 
+I completely got rid of my Node class because it slowed down my implementation
+when searching for a Node in the graph. My Node object only had one string field,
+so it was better to just use a String to represent a Node instead of having a Node
+object. I also added a getNode() method to my graph to find Marvel characters. I 
+also had to change my tests to allow these changes.

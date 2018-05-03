@@ -1,0 +1,4 @@
+loaded graph twoCharsOneBook
+loaded graph twoCharsTwoBooksConnected
+loaded graph twoCharsTwoBooksNotConnected
+loaded graph complexGraph

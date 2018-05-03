@@ -52,9 +52,9 @@ public final class EdgeTests {
 	// toString Tests
 	@Test
 	public void testToString() {
-		assertEquals(e1.toString(), "Edge Label: e1, Child Node: n1");
-		assertEquals(e2.toString(), "Edge Label: e2, Child Node: n2");
-		assertNotEquals(e3.toString(), "Edge Label: e2, Child Node: n2");
+		assertEquals(e1.toString(), "e1 pointing to n1");
+		assertEquals(e2.toString(), "e2 pointing to n2");
+		assertNotEquals(e3.toString(), "e2 pointing to n2");
 	}
 
 	// compareTo Tests

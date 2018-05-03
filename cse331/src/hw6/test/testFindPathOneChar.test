@@ -1,0 +1,6 @@
+LoadGraph oneCharOneBook oneCharOneBook.tsv
+LoadGraph oneCharTwoBooks oneCharTwoBooks.tsv
+FindPath oneCharOneBook A A
+FindPath oneCharTwoBooks A A
+FindPath oneCharOneBook A B
+FindPath oneCharTwoBooks A B

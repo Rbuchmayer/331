@@ -81,7 +81,7 @@ public class Graph {
 	 * @return true if a Node containing <var>data<var> is in the Graph, false
 	 *         otherwise
 	 */
-	public boolean conatins(String data) {
+	public boolean contains(String data) {
 		return this.map.containsKey(data);
 	}
 
@@ -271,9 +271,9 @@ public class Graph {
 
 	// Private method that checks if the Rep Invariant is holding
 	private void checkRep() {
+		assert (this != null) : "this cannot be null";
+		assert (this.map != null) : "this.map cannot be null";
 		if (DEBUG) {
-			assert (this != null) : "this cannot be null";
-			assert (this.map != null) : "this.map cannot be null";
 			Set<String> keys = this.map.keySet();
 			for (String k : keys) {
 				assert (k != null) : "Null Node Found";

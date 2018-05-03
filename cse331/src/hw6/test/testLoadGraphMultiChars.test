@@ -1,0 +1,4 @@
+LoadGraph twoCharsOneBook twoCharsOneBook.tsv
+LoadGraph twoCharsTwoBooksConnected twoCharsTwoBooksConnected.tsv
+LoadGraph twoCharsTwoBooksNotConnected twoCharsTwoBooksNotConnected.tsv
+LoadGraph complexGraph complexGraph.tsv

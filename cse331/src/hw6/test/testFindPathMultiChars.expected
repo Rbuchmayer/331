@@ -1,0 +1,50 @@
+loaded graph twoCharsOneBook
+loaded graph twoCharsTwoBooksConnected
+loaded graph twoCharsTwoBooksNotConnected
+loaded graph complexGraph
+
+path from A to B:
+A to B via 1
+path from B to A:
+B to A via 1
+path from A to A:
+path from B to B:
+unknown character C
+
+path from A to B:
+A to B via 1
+path from B to A:
+B to A via 1
+path from A to A:
+path from B to B:
+unknown character C
+
+path from A to B:
+no path found
+path from B to A:
+no path found
+path from A to A:
+path from B to B:
+unknown character C
+
+path from A to H:
+no path found
+path from G to H:
+no path found
+path from H to H:
+path from A to B:
+A to D via 1
+D to B via 2
+path from B to A:
+B to D via 2
+D to A via 1
+path from C to A:
+C to F via 3
+F to A via 1
+path from B to B:
+path from B to F:
+B to D via 2
+D to F via 1
+path from G to C:
+G to C via 3
+unknown character M

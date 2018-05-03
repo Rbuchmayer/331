@@ -1,0 +1,38 @@
+package hw6.test;
+
+import hw6.*;
+import hw6.MarvelParser.MalformedDataException;
+import hw5.*;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+
+public final class MarvelPathTests {
+
+	@Before
+	public void testAssertsEnabled() {
+		CheckAsserts.checkAssertsEnabled();
+	}
+
+	// makeGraph Tests
+	@Test
+	public void testMakeGraphNull() throws MalformedDataException  {
+		assertEquals(MarvelPaths.makeGraph(null), null);
+	}
+
+	// findPath Tests
+	@Test(expected = IllegalArgumentException.class)
+	public void testFindPathNullGraph() throws MalformedDataException {
+		MarvelPaths.findPath(null, "", "");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFindPathBadCharacters() throws MalformedDataException {
+		Graph g = MarvelPaths.makeGraph("src/hw6/data/staffSuperheroes.tsv");
+		MarvelPaths.findPath(g, "Ryan", "Grossman-the-Youngest-of-them-all");
+		MarvelPaths.findPath(g, "Grossman-the-Youngest-of-them-all", "Ryan");
+		MarvelPaths.findPath(g, "Ryan", "Adam");
+	}
+}
