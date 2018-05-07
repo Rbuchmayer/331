@@ -52,7 +52,6 @@ public class HW6TestDriver {
 	}
 
 	/** String -> Graph: maps the names of graphs to the actual graph **/
-	// TODO for the student: Parameterize the next line correctly.
 	private final Map<String, Graph> graphs = new HashMap<String, Graph>();
 	private final PrintWriter output;
 	private final BufferedReader input;
