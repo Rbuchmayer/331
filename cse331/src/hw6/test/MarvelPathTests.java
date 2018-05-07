@@ -16,7 +16,7 @@ public final class MarvelPathTests {
 		CheckAsserts.checkAssertsEnabled();
 	}
 
-	// makeGraph Tests
+	// makeGraphNull Tests
 	@Test
 	public void testMakeGraphNull() throws MalformedDataException  {
 		assertEquals(MarvelPaths.makeGraph(null), null);
@@ -28,11 +28,17 @@ public final class MarvelPathTests {
 		MarvelPaths.findPath(null, "", "");
 	}
 
+	// exception  Tests
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindPathBadCharacters() throws MalformedDataException {
 		Graph g = MarvelPaths.makeGraph("src/hw6/data/staffSuperheroes.tsv");
 		MarvelPaths.findPath(g, "Ryan", "Grossman-the-Youngest-of-them-all");
 		MarvelPaths.findPath(g, "Grossman-the-Youngest-of-them-all", "Ryan");
 		MarvelPaths.findPath(g, "Ryan", "Adam");
+	}
+	
+	@Test(expected = MalformedDataException.class)
+	public void testMakeGraphMalformed() throws MalformedDataException {
+		 MarvelPaths.makeGraph("src/hw6/data/malformedGraph.tsv");
 	}
 }
