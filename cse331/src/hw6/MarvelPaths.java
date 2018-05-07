@@ -33,9 +33,11 @@ public final class MarvelPaths {
 		Set<String> characters = new HashSet<String>();
 		Map<String, List<String>> books = new HashMap<String, List<String>>();
 		MarvelParser.parseData(file, characters, books);
+		//add all characters to graph
 		for (String s : characters) {
 			g.addNode(s);
 		}
+		//add all edges to graph
 		for (String book : books.keySet()) {
 			int i = 1;
 			List<String> charsInBook = books.get(book);
@@ -89,6 +91,7 @@ public final class MarvelPaths {
 			Set<Edge> edges = new TreeSet<Edge>();
 			edges.addAll(g.getOutgoingEdges(node));
 			for (Edge e : edges) {
+				//if not visited, append path and mark as visited 
 				if (!visited.containsKey(e.getChild())) {
 					List<Edge> path = visited.get(node);
 					List<Edge> path_appended = new ArrayList<Edge>(path);
@@ -99,6 +102,7 @@ public final class MarvelPaths {
 				}
 			}
 		}
+		//return null if no path found
 		return null;
 	}
 
