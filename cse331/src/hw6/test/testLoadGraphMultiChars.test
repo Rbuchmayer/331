@@ -2,3 +2,5 @@ LoadGraph twoCharsOneBook twoCharsOneBook.tsv
 LoadGraph twoCharsTwoBooksConnected twoCharsTwoBooksConnected.tsv
 LoadGraph twoCharsTwoBooksNotConnected twoCharsTwoBooksNotConnected.tsv
 LoadGraph complexGraph complexGraph.tsv
+LoadGraph staff staffSuperheroes.tsv
+LoadGraph marvel marvel.tsv
