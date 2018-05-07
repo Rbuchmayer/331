@@ -13,7 +13,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 
 @RunWith(Suite.class)
-@SuiteClasses({ CheckAsserts.class, EdgeTests.class, NodeTests.class, GraphTests.class})
+@SuiteClasses({ CheckAsserts.class, EdgeTests.class, GraphTests.class})
 public final class ImplementationTests
 {
   

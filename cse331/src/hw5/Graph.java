@@ -30,7 +30,7 @@ public class Graph {
 	 * null. Also, every Edge's child Node is contained in the Graph
 	 */
 
-	private final static boolean DEBUG = true;
+	private final static boolean DEBUG = false;
 
 	/**
 	 * Constructs an empty Graph

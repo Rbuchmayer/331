@@ -7,7 +7,9 @@ Briefly describe any changes made to your Graph ADT from HW5 and why
 those changes were made below.  (See the HW6 assignment for details.)
 
 I completely got rid of my Node class because it slowed down my implementation
-when searching for a Node in the graph. My Node object only had one string field,
-so it was better to just use a String to represent a Node instead of having a Node
-object. I also added a getNode() method to my graph to find Marvel characters. I 
-also had to change my tests to allow these changes.
+when searching for a Node in the graph (it took about 2 minutes to build a Graph). Instead,
+I used a single String to represent a Node so I could just use the contains() method when 
+searching for a Node instead of traversing through the entire Graph looking for an object. 
+My Node object only had one string field, so it was better to just use a String to 
+represent a Node instead of having a Node object. I also had to change my tests to allow 
+these changes.

@@ -1,7 +1,6 @@
 package hw5.test;
 
 import hw5.Graph;
-import hw5.Node;
 import hw5.Edge;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -191,7 +190,6 @@ public final class GraphTests {
 		assertEquals(g6.toString(),
 				"{n9=[e5 pointing to n10, " + "e6 pointing to n10], n10=[]}");
 
-		System.out.println(g7.toString());
 		assertEquals(g7.toString(),
 				"{n13=[e10 pointing to n11, e11 pointing to n12], "
 						+ "n12=[e9 pointing to n13], n11=[e7 pointing to n11, e8 pointing to n12]}");

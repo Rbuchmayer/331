@@ -1,7 +1,6 @@
 package hw5.test;
 
 import hw5.Edge;
-import hw5.Node;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

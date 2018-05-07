@@ -4,9 +4,8 @@ import hw5.*;
 import hw6.MarvelParser.MalformedDataException;
 
 import java.util.*;
-import java.util.Comparator;
 
-public class MarvelPaths {
+public final class MarvelPaths {
 
 	/*
 	 * MarvelPaths does not have an AF, RI, or checkRep() because all its
@@ -59,7 +58,7 @@ public class MarvelPaths {
 	 * Returns the shortest path between two Nodes in a Graph
 	 * 
 	 * @param g
-	 *            The Graph containing the Nodes
+	 *            The Graph containing the two Nodes
 	 * @param start
 	 *            The data of the Node at the start of the path
 	 * @param dest
@@ -81,18 +80,20 @@ public class MarvelPaths {
 		queue.add(start);
 		visited.put(start, new ArrayList<Edge>());
 		while (!queue.isEmpty()) {
+			//node to explore
 			String node = queue.remove();
 			if (node.equals(dest)) {
 				return visited.get(node);
 			}
+			//explore node's children
 			Set<Edge> edges = new TreeSet<Edge>();
 			edges.addAll(g.getOutgoingEdges(node));
 			for (Edge e : edges) {
 				if (!visited.containsKey(e.getChild())) {
-					List<Edge> p1 = visited.get(node);
-					List<Edge> p2 = new ArrayList<Edge>(p1);
-					p2.add(e);
-					visited.put(e.getChild(), p2);
+					List<Edge> path = visited.get(node);
+					List<Edge> path_appended = new ArrayList<Edge>(path);
+					path_appended.add(e);
+					visited.put(e.getChild(), path_appended);
 					String next = e.getChild();
 					queue.add(next);
 				}
@@ -101,6 +102,7 @@ public class MarvelPaths {
 		return null;
 	}
 
+	//Main method to support command-line input
 	public static void main(String[] args) throws Exception {
 		Graph g = makeGraph("src/hw6/data/marvel.tsv");
 		Scanner sc = new Scanner(System.in);
@@ -125,6 +127,7 @@ public class MarvelPaths {
 			sc.nextLine();
 			if (ans.startsWith("n") || ans.startsWith("N")) {
 				again = false;
+				sc.close();
 			}
 		}
 	}
