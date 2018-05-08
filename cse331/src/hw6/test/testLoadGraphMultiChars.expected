@@ -1,3 +1,4 @@
+# load graphs with multiple characters
 loaded graph twoCharsOneBook
 loaded graph twoCharsTwoBooksConnected
 loaded graph twoCharsTwoBooksNotConnected

@@ -1,3 +1,4 @@
+# look for paths in an empty graph
 LoadGraph empty emptyGraph.tsv
 FindPath empty a a
 FindPath empty a b

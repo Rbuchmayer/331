@@ -1,3 +1,4 @@
+# load graphs with multiple characters
 LoadGraph twoCharsOneBook twoCharsOneBook.tsv
 LoadGraph twoCharsTwoBooksConnected twoCharsTwoBooksConnected.tsv
 LoadGraph twoCharsTwoBooksNotConnected twoCharsTwoBooksNotConnected.tsv

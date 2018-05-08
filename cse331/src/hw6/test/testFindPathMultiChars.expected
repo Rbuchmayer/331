@@ -3,13 +3,7 @@ loaded graph twoCharsTwoBooksConnected
 loaded graph twoCharsTwoBooksNotConnected
 loaded graph complexGraph
 
-path from A to B:
-A to B via 1
-path from B to A:
-B to A via 1
-path from A to A:
-path from B to B:
-unknown character C
+# look for paths in twoCharsOneBook
 
 path from A to B:
 A to B via 1
@@ -19,6 +13,18 @@ path from A to A:
 path from B to B:
 unknown character C
 
+# look for paths in twoCharsTwoBooksConnected
+
+path from A to B:
+A to B via 1
+path from B to A:
+B to A via 1
+path from A to A:
+path from B to B:
+unknown character C
+
+# look for paths in twoCharsTwoBooksNorConnected
+
 path from A to B:
 no path found
 path from B to A:
@@ -26,6 +32,8 @@ no path found
 path from A to A:
 path from B to B:
 unknown character C
+
+# look for paths in complexGraph
 
 path from A to H:
 no path found

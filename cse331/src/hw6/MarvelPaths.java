@@ -5,7 +5,7 @@ import hw6.MarvelParser.MalformedDataException;
 
 import java.util.*;
 
-public final class MarvelPaths {
+public class MarvelPaths {
 
 	/*
 	 * MarvelPaths does not have an AF, RI, or checkRep() because all its
@@ -23,21 +23,22 @@ public final class MarvelPaths {
 	 *             if the file is not well-formed: each line contains exactly
 	 *             two tokens separated by a tab, or else starting with a #
 	 *             symbol to indicate a comment line.
-	 * @return A graph built from file, null if file is null.
+	 * @return A Graph built from file, null if file is null.
 	 */
 	public static Graph makeGraph(String file) throws MalformedDataException {
 		if (file == null) {
 			return null;
 		}
 		Graph g = new Graph();
+		// parse the data
 		Set<String> characters = new HashSet<String>();
 		Map<String, List<String>> books = new HashMap<String, List<String>>();
 		MarvelParser.parseData(file, characters, books);
-		//add all characters to graph
+		// add all characters to graph
 		for (String s : characters) {
 			g.addNode(s);
 		}
-		//add all edges to graph
+		// add all edges to graph
 		for (String book : books.keySet()) {
 			int i = 1;
 			List<String> charsInBook = books.get(book);
@@ -45,10 +46,8 @@ public final class MarvelPaths {
 				// sublist to avoid re-adding Edges
 				List<String> sublist = charsInBook.subList(i, charsInBook.size());
 				for (String character2 : sublist) {
-					if (!character1.equals(character2)) {
-						g.addEdge(character1, new Edge(character2, book));
-						g.addEdge(character2, new Edge(character1, book));
-					}
+					g.addEdge(character1, new Edge(character2, book));
+					g.addEdge(character2, new Edge(character1, book));
 				}
 				i++;
 			}
@@ -77,36 +76,40 @@ public final class MarvelPaths {
 		if (!g.contains(start) || !g.contains(dest)) {
 			throw new IllegalArgumentException("one of the characters is not in the Graph");
 		}
+		// Initialize working queue
 		LinkedList<String> queue = new LinkedList<String>();
+		// Initialize map of visited Nodes
 		Map<String, List<Edge>> visited = new HashMap<String, List<Edge>>();
 		queue.add(start);
 		visited.put(start, new ArrayList<Edge>());
 		while (!queue.isEmpty()) {
-			//node to explore
+			// pop Node to explore
 			String node = queue.remove();
 			if (node.equals(dest)) {
 				return visited.get(node);
 			}
-			//explore node's children
+			// explore node's children
 			Set<Edge> edges = new TreeSet<Edge>();
 			edges.addAll(g.getOutgoingEdges(node));
+			System.out.println(edges);
 			for (Edge e : edges) {
-				//if not visited, append path and mark as visited 
-				if (!visited.containsKey(e.getChild())) {
+				// if not visited, append path and mark as visited
+				String child = e.getChild();
+				if (!visited.containsKey(child)) {
 					List<Edge> path = visited.get(node);
 					List<Edge> path_appended = new ArrayList<Edge>(path);
 					path_appended.add(e);
-					visited.put(e.getChild(), path_appended);
-					String next = e.getChild();
+					visited.put(child, path_appended);
+					String next = child;
 					queue.add(next);
 				}
 			}
 		}
-		//return null if no path found
+		// return null if no path found
 		return null;
 	}
 
-	//Main method to support command-line input
+	// Main method to support command-line input
 	public static void main(String[] args) throws Exception {
 		Graph g = makeGraph("src/hw6/data/marvel.tsv");
 		Scanner sc = new Scanner(System.in);

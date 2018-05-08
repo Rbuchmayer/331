@@ -1,6 +1,12 @@
 LoadGraph oneCharOneBook oneCharOneBook.tsv
 LoadGraph oneCharTwoBooks oneCharTwoBooks.tsv
+
+# look for path to self
+
 FindPath oneCharOneBook A A
 FindPath oneCharTwoBooks A A
+
+# look for path with unknown characters
+
 FindPath oneCharOneBook A B
 FindPath oneCharTwoBooks A B

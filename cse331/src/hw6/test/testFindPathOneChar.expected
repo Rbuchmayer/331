@@ -1,6 +1,12 @@
 loaded graph oneCharOneBook
 loaded graph oneCharTwoBooks
+
+# look for path to self
+
 path from A to A:
 path from A to A:
+
+# look for path with unknown characters
+
 unknown character B
 unknown character B

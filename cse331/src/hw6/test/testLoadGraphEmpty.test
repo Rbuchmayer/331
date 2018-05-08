@@ -1,1 +1,2 @@
+# load an empty Graph
 LoadGraph empty emptyGraph.tsv
