@@ -24,7 +24,7 @@ public class Graph {
 	 * e1, e2, e3, and e4 are outgoing edges.
 	 * 
 	 * Representative Invariant: For every Graph g, g != null, g.map != null,
-	 * g.nodes != null, g.edges != null, and g.nodes.contains(g.edges.children)
+	 * g.map.keyset() != null, all edges in g != null, and g.map.keyset().contains(child of all edges)
 	 * 
 	 * In other words: g, map, all Nodes, and all Edges in the Graph are not
 	 * null. Also, every Edge's child Node is contained in the Graph
@@ -46,6 +46,7 @@ public class Graph {
 	 * @return an int representing the number of Nodes in this Graph
 	 */
 	public int size() {
+		checkRep();
 		return this.map.keySet().size();
 	}
 
@@ -55,6 +56,7 @@ public class Graph {
 	 * @return An int representing the total number of Edges in this Graph
 	 */
 	public int totalEdges() {
+		checkRep();
 		int total = 0;
 		for (String s : this.map.keySet()) {
 			total += this.map.get(s).size();
@@ -68,6 +70,7 @@ public class Graph {
 	 * @return true if this Graph is empty (contains no Nodes and Edges)
 	 */
 	public boolean isEmpty() {
+		checkRep();
 		return this.map.isEmpty();
 	}
 
@@ -82,6 +85,7 @@ public class Graph {
 	 *         otherwise
 	 */
 	public boolean contains(String data) {
+		checkRep();
 		return this.map.containsKey(data);
 	}
 
@@ -91,6 +95,7 @@ public class Graph {
 	 * @return a string representation of this Graph
 	 */
 	public String toString() {
+		checkRep();
 		return this.map.toString();
 	}
 
@@ -101,6 +106,7 @@ public class Graph {
 	 * @effects Removes every Node and Edge from this Graph
 	 */
 	public void clear() {
+		checkRep();
 		this.map.clear();
 		checkRep();
 	}
@@ -170,7 +176,7 @@ public class Graph {
 		}
 		Set<Edge> edges = this.map.get(parent);
 		edges.add(edge);
-
+		checkRep();
 	}
 
 	/**
@@ -226,15 +232,18 @@ public class Graph {
 		Set<Edge> xEdges = this.map.get(x);
 		for (Edge e : xEdges) {
 			if (e.getChild().equals(y)) {
+				checkRep();
 				return true;
 			}
 		}
 		Set<Edge> yEdges = this.map.get(y);
 		for (Edge e : yEdges) {
 			if (e.getChild().equals(x)) {
+				checkRep();
 				return true;
 			}
 		}
+		checkRep();
 		return false;
 	}
 
@@ -254,6 +263,7 @@ public class Graph {
 		}
 		Set<Edge> result = new TreeSet<Edge>();
 		result.addAll(this.map.get(node));
+		checkRep();
 		return result;
 	}
 
@@ -266,6 +276,7 @@ public class Graph {
 	public Set<String> getNodes() {
 		Set<String> result = new TreeSet<String>();
 		result.addAll(this.map.keySet());
+		checkRep();
 		return result;
 	}
 

@@ -91,7 +91,6 @@ public class MarvelPaths {
 			// explore node's children
 			Set<Edge> edges = new TreeSet<Edge>();
 			edges.addAll(g.getOutgoingEdges(node));
-			System.out.println(edges);
 			for (Edge e : edges) {
 				// if not visited, append path and mark as visited
 				String child = e.getChild();
@@ -115,7 +114,7 @@ public class MarvelPaths {
 		Scanner sc = new Scanner(System.in);
 		boolean again = true;
 		while (again) {
-			System.out.println("Shortest path between which two Marvel characters! Enter the first character:");
+			System.out.println("Shortest path between two Marvel characters! Enter the first character:");
 			String c1 = sc.nextLine();
 			System.out.println("Enter the second character:");
 			String c2 = sc.nextLine();
