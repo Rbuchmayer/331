@@ -46,6 +46,7 @@ public class MarvelPaths {
 				// sublist to avoid re-adding Edges
 				List<String> sublist = charsInBook.subList(i, charsInBook.size());
 				for (String character2 : sublist) {
+					// avoid reflexsive edges
 					if (!character1.equals(character2)) {
 						g.addEdge(character1, new Edge(character2, book));
 						g.addEdge(character2, new Edge(character1, book));

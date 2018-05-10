@@ -1,3 +1,4 @@
+# make sure no self edges
 loaded graph reflex
 the children of A in reflex are: B(1) 
 the children of B in reflex are: A(1) 
