@@ -1,0 +1,3 @@
+LoadGraph reflex reflexsiveGraph.tsv
+ListChildren reflex A
+ListChildren reflex B

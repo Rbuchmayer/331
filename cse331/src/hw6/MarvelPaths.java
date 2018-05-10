@@ -46,8 +46,10 @@ public class MarvelPaths {
 				// sublist to avoid re-adding Edges
 				List<String> sublist = charsInBook.subList(i, charsInBook.size());
 				for (String character2 : sublist) {
-					g.addEdge(character1, new Edge(character2, book));
-					g.addEdge(character2, new Edge(character1, book));
+					if (!character1.equals(character2)) {
+						g.addEdge(character1, new Edge(character2, book));
+						g.addEdge(character2, new Edge(character1, book));
+					}
 				}
 				i++;
 			}
@@ -109,10 +111,20 @@ public class MarvelPaths {
 	}
 
 	// Main method to support command-line input
-	public static void main(String[] args) throws Exception {
-		Graph g = makeGraph("src/hw6/data/marvel.tsv");
+	public static void main(String[] args) {
+		Graph g;
+		boolean again;
+		try {
+			g = makeGraph("src/hw6/data/marvel.tsv");
+			again = true;
+		} catch (MalformedDataException e) {
+			System.out.println("Marvel.tsv is malformed");
+			again = false;
+			g = null;
+			e.printStackTrace();
+		}
 		Scanner sc = new Scanner(System.in);
-		boolean again = true;
+
 		while (again) {
 			System.out.println("Shortest path between two Marvel characters! Enter the first character:");
 			String c1 = sc.nextLine();
