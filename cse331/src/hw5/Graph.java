@@ -11,9 +11,14 @@ import java.util.*;
  * n2]}", and "{n3=[Edge Label: e2, Child Node: n3]}"
  */
 
-public class Graph<N, L extends Comparable<L>> {
+public class Graph<N, L> {
 
-	// Holds all the Nodes and Edges in the Graph 
+	/*
+	 * Generic Type N represents the data of a Node, and generic type L
+	 * represents the type of the labels in this Graph.
+	 */
+
+	// Holds all the Nodes and Edges in the Graph
 	private Map<N, HashSet<Edge<N, L>>> map;
 
 	/*
@@ -24,7 +29,8 @@ public class Graph<N, L extends Comparable<L>> {
 	 * e1, e2, e3, and e4 are outgoing edges.
 	 * 
 	 * Representative Invariant: For every Graph g, g != null, g.map != null,
-	 * g.map.keyset() != null, all edges in g != null, and g.map.keyset().contains(child of all edges)
+	 * g.map.keyset() != null, all edges in g != null, and
+	 * g.map.keyset().contains(child of all edges)
 	 * 
 	 * In other words: g, map, all Nodes, and all Edges in the Graph are not
 	 * null. Also, every Edge's child Node is contained in the Graph

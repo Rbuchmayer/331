@@ -12,6 +12,11 @@ package hw5;
 
 public final class Edge<N, L> implements Comparable<Edge<N, L>> {
 
+	/*
+	 * Generic type N represents the type of the child Node of this Edge, and
+	 * generic type L represents the type of the label of this Edge
+	 */
+
 	// Holds the child Node of this Edge
 	private final N child;
 

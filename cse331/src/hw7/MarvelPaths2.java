@@ -68,7 +68,7 @@ public class MarvelPaths2 {
 		if (g == null || start == null || dest == null) {
 			throw new IllegalArgumentException("One of the arguments is null");
 		}
-		// private class to compare by lowest cost
+		// Inner class to compare by lowest cost
 		class compareEdges implements Comparator<ArrayList<Edge<N, Double>>> {
 			@Override
 			public int compare(ArrayList<Edge<N, Double>> o1, ArrayList<Edge<N, Double>> o2) {
