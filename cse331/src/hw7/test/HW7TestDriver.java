@@ -214,8 +214,19 @@ public class HW7TestDriver {
 
 		Graph<String, Double> g = graphs.get(graphName);
 		Set<Edge<String, Double>> edges = g.getOutgoingEdges(parentName);
+		Set<Edge<String, Double>> orderedEdges = new TreeSet<Edge<String, Double>>(new Comparator<Edge<String, Double>>() {
+			public int compare(Edge<String, Double> e1, Edge<String, Double> e2){
+				if(!(e1.getChild().equals(e2.getChild())))
+					return e1.getChild().compareTo(e2.getChild());
+				
+				if (!(e1.getLabel().equals(e2.getLabel())))
+					return e1.getLabel().compareTo(e2.getLabel());
+				return 0;
+			}
+		});
+		orderedEdges.addAll(edges);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
-		for (Edge<String, Double> e : edges) {
+		for (Edge<String, Double> e : orderedEdges) {
 			String cost = String.format("%.3f", e.getLabel());
 			output.print(" " + e.getChild() + "(" + cost + ")");
 		}
