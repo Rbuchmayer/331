@@ -276,7 +276,7 @@ public class Graph<N, L> {
 	/**
 	 * Returns a set of all the Nodes in this Graph
 	 * 
-	 * @return a Set of Strings that represent the data of every Node in this
+	 * @return a Set that represent the data of every Node in this
 	 *         Graph
 	 */
 	public Set<N> getNodes() {
