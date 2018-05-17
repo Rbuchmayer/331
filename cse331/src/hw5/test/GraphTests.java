@@ -25,64 +25,64 @@ public final class GraphTests {
 	private String n14 = "n14";
 
 	// Some basic Graphs
-	Graph EMPTY;
-	Graph g1;
-	Graph g2;
-	Graph g3;
-	Graph g4;
-	Graph g5;
-	Graph g6;
-	Graph g7;
+	Graph<String, String> EMPTY;
+	Graph<String, String> g1;
+	Graph<String, String> g2;
+	Graph<String, String> g3;
+	Graph<String, String> g4;
+	Graph<String, String> g5;
+	Graph<String, String> g6;
+	Graph<String, String> g7;
 
 	@Before
 	public void makeGraphs() {
 		// Empty Graph
-		EMPTY = new Graph();
+		EMPTY = new Graph<String, String>();
 
 		// One Node Graph
-		g1 = new Graph();
+		g1 = new Graph<String, String>();
 		g1.addNode(n1);
 
 		// One Node, one Edge Graph
-		g2 = new Graph();
+		g2 = new Graph<String, String>();
 		g2.addNode(n2);
-		g2.addEdge(n2, new Edge(n2, "e1"));
+		g2.addEdge(n2, new Edge<String, String>(n2, "e1"));
 
 		// Two Nodes, two Edge Graph
-		g3 = new Graph();
+		g3 = new Graph<String, String>();
 		g3.addNode(n3);
 		g3.addNode(n4);
-		g3.addEdge(n3, new Edge(n4, "e2"));
+		g3.addEdge(n3, new Edge<String, String>(n4, "e2"));
 
 		// Two Nodes, no Edge Graph
-		g4 = new Graph();
+		g4 = new Graph<String, String>();
 		g4.addNode(n5);
 		g4.addNode(n6);
 
 		// Two Nodes, two opposite Edges Graph
-		g5 = new Graph();
+		g5 = new Graph<String, String>();
 		g5.addNode(n7);
 		g5.addNode(n8);
-		g5.addEdge(n7, new Edge(n8, "e3"));
-		g5.addEdge(n8, new Edge(n7, "e4"));
+		g5.addEdge(n7, new Edge<String, String>(n8, "e3"));
+		g5.addEdge(n8, new Edge<String, String>(n7, "e4"));
 
 		// Two Nodes, two same direction Edges Graph
-		g6 = new Graph();
+		g6 = new Graph<String, String>();
 		g6.addNode(n9);
 		g6.addNode(n10);
-		g6.addEdge(n9, new Edge(n10, "e5"));
-		g6.addEdge(n9, new Edge(n10, "e6"));
+		g6.addEdge(n9, new Edge<String, String>(n10, "e5"));
+		g6.addEdge(n9, new Edge<String, String>(n10, "e6"));
 
 		// Complex Graph with 3 Nodes and five Edges
-		g7 = new Graph();
+		g7 = new Graph<String, String>();
 		g7.addNode(n11);
 		g7.addNode(n12);
 		g7.addNode(n13);
-		g7.addEdge(n11, new Edge(n11, "e7"));
-		g7.addEdge(n11, new Edge(n12, "e8"));
-		g7.addEdge(n12, new Edge(n13, "e9"));
-		g7.addEdge(n13, new Edge(n11, "e10"));
-		g7.addEdge(n13, new Edge(n12, "e11"));
+		g7.addEdge(n11, new Edge<String, String>(n11, "e7"));
+		g7.addEdge(n11, new Edge<String, String>(n12, "e8"));
+		g7.addEdge(n12, new Edge<String, String>(n13, "e9"));
+		g7.addEdge(n13, new Edge<String, String>(n11, "e10"));
+		g7.addEdge(n13, new Edge<String, String>(n12, "e11"));
 	}
 
 	@Before
@@ -93,7 +93,9 @@ public final class GraphTests {
 	// Constructor Tests
 	@Test
 	public void testConstructor() {
-		new Graph();
+		new Graph<String, String>();
+		new Graph<Integer, String>();
+		new Graph<String, Integer>();
 	}
 
 	// Size Tests
@@ -266,26 +268,26 @@ public final class GraphTests {
 	@Test
 	public void testAddEdgeToSingleNodeGraph() {
 		assertSame(g1.totalEdges(), 0);
-		g1.addEdge(n1, new Edge(n1, "e1"));
+		g1.addEdge(n1, new Edge<String, String>(n1, "e1"));
 		assertSame(g1.totalEdges(), 1);
-		g2.addEdge(n2, new Edge(n2, "e2"));
+		g2.addEdge(n2, new Edge<String, String>(n2, "e2"));
 		assertSame(g2.totalEdges(), 2);
 	}
 
 	@Test
 	public void testAddEdgeToMultiNodeGraph() {
-		g4.addEdge(n5, new Edge(n6, "e3"));
+		g4.addEdge(n5, new Edge<String, String>(n6, "e3"));
 		assertSame(g4.totalEdges(), 1);
-		g4.addEdge(n6, new Edge(n5, "e4"));
+		g4.addEdge(n6, new Edge<String, String>(n5, "e4"));
 		assertSame(g4.totalEdges(), 2);
-		g7.addEdge(n12, new Edge(n11, "e5"));
+		g7.addEdge(n12, new Edge<String, String>(n11, "e5"));
 		assertSame(g7.totalEdges(), 6);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddEdgeException() {
-		g1.addEdge(n1, new Edge(n2, "e3"));
-		g7.addEdge(n12, new Edge(n8, "e9"));
+		g1.addEdge(n1, new Edge<String, String>(n2, "e3"));
+		g7.addEdge(n12, new Edge<String, String>(n8, "e9"));
 	}
 
 	// removeEdge Tests
@@ -305,8 +307,8 @@ public final class GraphTests {
 		g6.removeEdge(n9, n10, "e5");
 		assertTrue(g6.adjacent(n9, n10));
 		assertSame(g6.totalEdges(), 1);
-		g6.addEdge(n9, new Edge(n10, "edge"));
-		g6.addEdge(n9, new Edge(n10, "edge"));
+		g6.addEdge(n9, new Edge<String, String>(n10, "edge"));
+		g6.addEdge(n9, new Edge<String, String>(n10, "edge"));
 		assertSame(g6.totalEdges(), 2);
 		g6.removeEdge(n9, n10, "edge");
 		assertSame(g6.totalEdges(), 1);

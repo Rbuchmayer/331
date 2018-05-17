@@ -1,0 +1,14 @@
+loaded graph oneCharOneBook
+loaded graph oneCharTwoBooks
+
+# look for path to self
+
+path from A to A:
+total cost: 0.000
+path from A to A:
+total cost: 0.000
+
+# look for path with unknown characters
+
+unknown character B
+unknown character B

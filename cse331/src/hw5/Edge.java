@@ -1,20 +1,22 @@
 package hw5;
 
 /**
- * <b>Edge</b> represents an immutable, labeled, directed Edge. Edges are used
- * to connect Nodes in a Graph.
+ * <b>Edge</b> represents a labeled, directed Edge. Edges are used to connect
+ * Nodes in a Graph. Note that if mutable objects are used in an Edge, the
+ * Edge's behavior is unspecified if the object is changed.
  * <p>
  * 
  * One example of an Edge might be: "e1 pointing to n1"
+ * 
  */
 
-public final class Edge implements Comparable<Edge> {
+public final class Edge<N, L> implements Comparable<Edge<N, L>> {
 
-	/** Holds the child Node of this Edge */
-	private final String child;
+	// Holds the child Node of this Edge
+	private final N child;
 
-	/** Holds the label of this Edge */
-	private final String label;
+	// Holds the label of this Edge
+	private final L label;
 
 	/*
 	 * Abstract Function: Edge, e, represents an Edge such that e.child is the
@@ -34,7 +36,7 @@ public final class Edge implements Comparable<Edge> {
 	 *            The label of this Edge
 	 * @requires child != null and label != null
 	 */
-	public Edge(String child, String label) {
+	public Edge(N child, L label) {
 		this.child = child;
 		this.label = label;
 		checkRep();
@@ -43,18 +45,20 @@ public final class Edge implements Comparable<Edge> {
 	/**
 	 * Gets the data of this Edge's child Node.
 	 * 
-	 * @return the data held by the child Node of the this Edge
+	 * @return the child of this Edge
 	 */
-	public String getChild() {
+	public N getChild() {
+		checkRep();
 		return this.child;
 	}
 
 	/**
 	 * Gets the label of this Edge.
 	 * 
-	 * @return A String representing the label of this Edge
+	 * @return A data of the label of this Edge
 	 */
-	public String getLabel() {
+	public L getLabel() {
+		checkRep();
 		return this.label;
 	}
 
@@ -65,12 +69,13 @@ public final class Edge implements Comparable<Edge> {
 	 *         child Node
 	 */
 	public String toString() {
+		checkRep();
 		return (this.getLabel() + " pointing to " + this.getChild());
 	}
 
 	/**
-	 * Compares two Edges first by child Node data (alphabetically), then by
-	 * label (alphabetically) if the child Nodes are equal.
+	 * Compares two Edges first by child Node, then by label if the child Nodes
+	 * are equal.
 	 * 
 	 * @param e
 	 *            Edge to be compared to this
@@ -80,11 +85,15 @@ public final class Edge implements Comparable<Edge> {
 	 *         Edge's are "equal"
 	 */
 	@Override
-	public int compareTo(Edge e) {
-		if (this.getChild().equals(e.getChild())) {
-			return this.getLabel().compareTo(e.getLabel());
+	public int compareTo(Edge<N, L> e) {
+		checkRep();
+		if (!this.getChild().equals(e.getChild())) {
+			return this.getChild().hashCode() - e.getChild().hashCode();
 		}
-		return this.getChild().compareTo(e.getChild());
+		if (!this.getLabel().equals(e.getLabel())) {
+			return this.getLabel().hashCode() - e.getLabel().hashCode();
+		}
+		return 0;
 	}
 
 	/**
@@ -99,8 +108,9 @@ public final class Edge implements Comparable<Edge> {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof Edge) {
-			Edge e = (Edge) o;
+		checkRep();
+		if (o instanceof Edge<?, ?>) {
+			Edge<?, ?> e = (Edge<?, ?>) o;
 			return this.getChild().equals(e.getChild()) && this.getLabel().equals(e.getLabel());
 		}
 		return false;
@@ -113,7 +123,8 @@ public final class Edge implements Comparable<Edge> {
 	 */
 	@Override
 	public int hashCode() {
-		return this.getLabel().length();
+		checkRep();
+		return label.hashCode() + child.hashCode();
 	}
 
 	// Private method to check if the Rep Invariant is held

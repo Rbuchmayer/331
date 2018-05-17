@@ -31,7 +31,7 @@ public final class MarvelPathTests {
 	// exception  Tests
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindPathBadCharacters() throws MalformedDataException {
-		Graph g = MarvelPaths.makeGraph("src/hw6/data/staffSuperheroes.tsv");
+		Graph<String, String> g = MarvelPaths.makeGraph("src/hw6/data/staffSuperheroes.tsv");
 		MarvelPaths.findPath(g, "Ryan", "Grossman-the-Youngest-of-them-all");
 	}
 	

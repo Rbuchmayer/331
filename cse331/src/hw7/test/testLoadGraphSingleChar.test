@@ -1,0 +1,3 @@
+# load graphs with one character
+LoadGraph oneCharOneBook oneCharOneBook.tsv
+LoadGraph oneCharTwoBooks oneCharOneBook.tsv

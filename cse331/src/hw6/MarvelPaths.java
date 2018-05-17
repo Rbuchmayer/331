@@ -25,11 +25,11 @@ public class MarvelPaths {
 	 *             symbol to indicate a comment line.
 	 * @return A Graph built from file, null if file is null.
 	 */
-	public static Graph makeGraph(String file) throws MalformedDataException {
+	public static Graph<String, String> makeGraph(String file) throws MalformedDataException {
 		if (file == null) {
 			return null;
 		}
-		Graph g = new Graph();
+		Graph<String, String> g = new Graph<String, String>();
 		// parse the data
 		Set<String> characters = new HashSet<String>();
 		Map<String, List<String>> books = new HashMap<String, List<String>>();
@@ -48,8 +48,8 @@ public class MarvelPaths {
 				for (String character2 : sublist) {
 					// avoid reflexsive edges
 					if (!character1.equals(character2)) {
-						g.addEdge(character1, new Edge(character2, book));
-						g.addEdge(character2, new Edge(character1, book));
+						g.addEdge(character1, new Edge<String, String>(character2, book));
+						g.addEdge(character2, new Edge<String, String>(character1, book));
 					}
 				}
 				i++;
@@ -72,19 +72,20 @@ public class MarvelPaths {
 	 * @return A list of Edges representing the shortest path from start to
 	 *         dest.
 	 */
-	public static List<Edge> findPath(Graph g, String start, String dest) {
+	public static List<Edge<String, String>> findPath(Graph<String, String> g, String start, String dest) {
 		if (g == null) {
 			throw new IllegalArgumentException("The Graph can not be null");
 		}
 		if (!g.contains(start) || !g.contains(dest)) {
 			throw new IllegalArgumentException("one of the characters is not in the Graph");
 		}
+
 		// Initialize working queue
 		LinkedList<String> queue = new LinkedList<String>();
 		// Initialize map of visited Nodes
-		Map<String, List<Edge>> visited = new HashMap<String, List<Edge>>();
+		Map<String, List<Edge<String, String>>> visited = new HashMap<String, List<Edge<String, String>>>();
 		queue.add(start);
-		visited.put(start, new ArrayList<Edge>());
+		visited.put(start, new ArrayList<Edge<String, String>>());
 		while (!queue.isEmpty()) {
 			// pop Node to explore
 			String node = queue.remove();
@@ -92,14 +93,14 @@ public class MarvelPaths {
 				return visited.get(node);
 			}
 			// explore node's children
-			Set<Edge> edges = new TreeSet<Edge>();
+			Set<Edge<String, String>> edges = new TreeSet<Edge<String, String>>();
 			edges.addAll(g.getOutgoingEdges(node));
-			for (Edge e : edges) {
+			for (Edge<String, String> e : edges) {
 				// if not visited, append path and mark as visited
 				String child = e.getChild();
 				if (!visited.containsKey(child)) {
-					List<Edge> path = visited.get(node);
-					List<Edge> path_appended = new ArrayList<Edge>(path);
+					List<Edge<String, String>> path = visited.get(node);
+					List<Edge<String, String>> path_appended = new ArrayList<Edge<String, String>>(path);
 					path_appended.add(e);
 					visited.put(child, path_appended);
 					String next = child;
@@ -113,7 +114,7 @@ public class MarvelPaths {
 
 	// Main method to support command-line input
 	public static void main(String[] args) {
-		Graph g;
+		Graph<String, String> g;
 		boolean again;
 		try {
 			g = makeGraph("src/hw6/data/marvel.tsv");
@@ -134,7 +135,7 @@ public class MarvelPaths {
 			if (!g.contains(c1) || !g.contains(c2)) {
 				System.out.println("One of your characters in not in Marvel!");
 			} else {
-				List<Edge> path = findPath(g, c1, c2);
+				List<Edge<String, String>> path = findPath(g, c1, c2);
 				if (path == null) {
 					System.out.println("no path between " + c1 + " and " + c2 + "!");
 				} else {

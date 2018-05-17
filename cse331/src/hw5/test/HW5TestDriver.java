@@ -52,7 +52,7 @@ public class HW5TestDriver {
 
 	/** String -> Graph: maps the names of graphs to the actual graph **/
 	// TODO for the student: Parameterize the next line correctly.
-	private final Map<String, Graph> graphs = new HashMap<String, Graph>();
+	private final Map<String, Graph<String, String>> graphs = new HashMap<String, Graph<String, String>>();
 	private final PrintWriter output;
 	private final BufferedReader input;
 
@@ -127,7 +127,7 @@ public class HW5TestDriver {
 	}
 
 	private void createGraph(String graphName) {
-		Graph g = new Graph();
+		Graph<String, String> g = new Graph<String, String>();
 
 		graphs.put(graphName, g);
 		output.println("created graph " + graphName);
@@ -145,7 +145,7 @@ public class HW5TestDriver {
 	}
 
 	private void addNode(String graphName, String nodeName) {
-		Graph g = graphs.get(graphName);
+		Graph<String, String> g = graphs.get(graphName);
 		g.addNode(nodeName);
 		output.println("added node " + nodeName + " to " + graphName);
 	}
@@ -165,8 +165,8 @@ public class HW5TestDriver {
 
 	private void addEdge(String graphName, String parentName, String childName, String edgeLabel) {
 
-		Graph g = graphs.get(graphName);
-		Edge e = new Edge(childName, edgeLabel);
+		Graph<String, String> g = graphs.get(graphName);
+		Edge<String, String> e = new Edge<String, String>(childName, edgeLabel);
 
 		g.addEdge(parentName, e);
 		output.println("added edge " + edgeLabel + " from " + parentName + " to " + childName + " in " + graphName);
@@ -183,7 +183,7 @@ public class HW5TestDriver {
 
 	private void listNodes(String graphName) {
 
-		Graph g = graphs.get(graphName);
+		Graph<String, String> g = graphs.get(graphName);
 		Set<String> nodes = g.getNodes();
 		output.print(graphName + " contains:");
 		for (String n : nodes) {
@@ -204,10 +204,10 @@ public class HW5TestDriver {
 
 	private void listChildren(String graphName, String parentName) {
 
-		Graph g = graphs.get(graphName);
-		Set<Edge> edges = g.getOutgoingEdges(parentName);
+		Graph<String, String> g = graphs.get(graphName);
+		Set<Edge<String, String>> edges = g.getOutgoingEdges(parentName);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
-		for(Edge e : edges){
+		for(Edge<String, String> e : edges){
 			output.print(" " + e.getChild() + "(" + e.getLabel() + ")");
 		}
 		output.println();

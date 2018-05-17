@@ -52,7 +52,7 @@ public class HW6TestDriver {
 	}
 
 	/** String -> Graph: maps the names of graphs to the actual graph **/
-	private final Map<String, Graph> graphs = new HashMap<String, Graph>();
+	private final Map<String, Graph<String, String>> graphs = new HashMap<String, Graph<String, String>>();
 	private final PrintWriter output;
 	private final BufferedReader input;
 
@@ -131,7 +131,7 @@ public class HW6TestDriver {
 	}
 
 	private void createGraph(String graphName) {
-		Graph g = new Graph();
+		Graph<String, String> g = new Graph<String, String>();
 
 		graphs.put(graphName, g);
 		output.println("created graph " + graphName);
@@ -149,7 +149,7 @@ public class HW6TestDriver {
 	}
 
 	private void addNode(String graphName, String nodeName) {
-		Graph g = graphs.get(graphName);
+		Graph<String, String> g = graphs.get(graphName);
 		g.addNode(nodeName);
 		output.println("added node " + nodeName + " to " + graphName);
 	}
@@ -169,8 +169,8 @@ public class HW6TestDriver {
 
 	private void addEdge(String graphName, String parentName, String childName, String edgeLabel) {
 
-		Graph g = graphs.get(graphName);
-		Edge e = new Edge(childName, edgeLabel);
+		Graph<String, String> g = graphs.get(graphName);
+		Edge<String, String> e = new Edge<String, String>(childName, edgeLabel);
 
 		g.addEdge(parentName, e);
 		output.println("added edge " + edgeLabel + " from " + parentName + " to " + childName + " in " + graphName);
@@ -187,7 +187,7 @@ public class HW6TestDriver {
 
 	private void listNodes(String graphName) {
 
-		Graph g = graphs.get(graphName);
+		Graph<String, String> g = graphs.get(graphName);
 		Set<String> nodes = g.getNodes();
 		output.print(graphName + " contains:");
 		for (String n : nodes) {
@@ -207,11 +207,23 @@ public class HW6TestDriver {
 	}
 
 	private void listChildren(String graphName, String parentName) {
-
-		Graph g = graphs.get(graphName);
-		Set<Edge> edges = g.getOutgoingEdges(parentName);
+		
+		Graph<String, String> g = graphs.get(graphName);
+		Set<Edge<String, String>> edges = g.getOutgoingEdges(parentName);
+		Set<Edge<String, String>> orderedEdges = new TreeSet<Edge<String, String>>(new Comparator<Edge<String, String>>() {
+			public int compare(Edge<String, String> e1, Edge<String, String> e2){
+				if(!(e1.getChild().equals(e2.getChild())))
+					return e1.getChild().compareTo(e2.getChild());
+				
+				if (!(e1.getLabel().equals(e2.getLabel())))
+					return e1.getLabel().compareTo(e2.getLabel());
+				
+				return 0;
+			}
+		});
+		orderedEdges.addAll(edges);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
-		for (Edge e : edges) {
+		for (Edge<String, String> e : orderedEdges) {
 			output.print(" " + e.getChild() + "(" + e.getLabel() + ")");
 		}
 		output.println();
@@ -246,7 +258,7 @@ public class HW6TestDriver {
 	}
 
 	private void findPath(String graphName, String node1Name, String node2Name) {
-		Graph g = graphs.get(graphName);
+		Graph<String, String> g = graphs.get(graphName);
 		if ((!g.contains(node1Name)) && (!g.contains(node2Name))) {
 			output.println("unknown character " + node1Name);
 			output.println("unknown character " + node2Name);
@@ -257,12 +269,12 @@ public class HW6TestDriver {
 		} else {
 			String node = node1Name;
 			String result = "path from " + node1Name + " to " + node2Name + ":";
-			List<Edge> path = MarvelPaths.findPath(g, node1Name, node2Name);
+			List<Edge<String, String>> path = MarvelPaths.findPath(g, node1Name, node2Name);
 
 			if (path == null) {
 				result += "\n" + "no path found";
 			} else {
-				for (Edge e : path) {
+				for (Edge<String, String> e : path) {
 					result += "\n" + node + " to " + e.getChild() + " via " + e.getLabel();
 					node = e.getChild();
 				}

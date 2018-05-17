@@ -1,0 +1,75 @@
+loaded graph twoCharsOneBook
+loaded graph twoCharsTwoBooksConnected
+loaded graph twoCharsTwoBooksNotConnected
+loaded graph complexGraph
+
+# look for paths in twoCharsOneBook
+
+path from A to B:
+A to B with weight 1.000
+total cost: 1.000
+path from B to A:
+B to A with weight 1.000
+total cost: 1.000
+path from A to A:
+total cost: 0.000
+path from B to B:
+total cost: 0.000
+unknown character C
+
+# look for paths in twoCharsTwoBooksConnected
+
+path from A to B:
+A to B with weight 0.500
+total cost: 0.500
+path from B to A:
+B to A with weight 0.500
+total cost: 0.500
+path from A to A:
+total cost: 0.000
+path from B to B:
+total cost: 0.000
+unknown character C
+
+# look for paths in twoCharsTwoBooksNotConnected
+
+path from A to B:
+no path found
+path from B to A:
+no path found
+path from A to A:
+total cost: 0.000
+path from B to B:
+total cost: 0.000
+unknown character C
+
+# look for paths in complexGraph
+
+path from A to H:
+no path found
+path from G to H:
+no path found
+path from H to H:
+total cost: 0.000
+path from A to B:
+A to D with weight 1.000
+D to B with weight 1.000
+total cost: 2.000
+path from B to A:
+B to D with weight 1.000
+D to A with weight 1.000
+total cost: 2.000
+path from C to A:
+C to F with weight 1.000
+F to A with weight 1.000
+total cost: 2.000
+path from B to B:
+total cost: 0.000
+path from B to F:
+B to G with weight 1.000
+G to F with weight 0.500
+total cost: 1.500
+path from G to C:
+G to C with weight 1.000
+total cost: 1.000
+unknown character M

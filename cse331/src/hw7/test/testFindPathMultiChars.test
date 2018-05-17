@@ -1,0 +1,41 @@
+LoadGraph twoCharsOneBook twoCharsOneBook.tsv
+LoadGraph twoCharsTwoBooksConnected twoCharsTwoBooksConnected.tsv
+LoadGraph twoCharsTwoBooksNotConnected twoCharsTwoBooksNotConnected.tsv
+LoadGraph complexGraph complexGraph.tsv
+
+# look for paths in twoCharsOneBook
+
+FindPath twoCharsOneBook A B
+FindPath twoCharsOneBook B A
+FindPath twoCharsOneBook A A
+FindPath twoCharsOneBook B B
+FindPath twoCharsOneBook B C
+
+# look for paths in twoCharsTwoBooksConnected
+
+FindPath twoCharsTwoBooksConnected A B
+FindPath twoCharsTwoBooksConnected B A
+FindPath twoCharsTwoBooksConnected A A
+FindPath twoCharsTwoBooksConnected B B
+FindPath twoCharsTwoBooksConnected A C
+
+# look for paths in twoCharsTwoBooksNotConnected
+
+FindPath twoCharsTwoBooksNotConnected A B
+FindPath twoCharsTwoBooksNotConnected B A
+FindPath twoCharsTwoBooksNotConnected A A
+FindPath twoCharsTwoBooksNotConnected B B
+FindPath twoCharsTwoBooksNotConnected C A
+
+# look for paths in complexGraph
+
+FindPath complexGraph A H
+FindPath complexGraph G H
+FindPath complexGraph H H
+FindPath complexGraph A B
+FindPath complexGraph B A
+FindPath complexGraph C A
+FindPath complexGraph B B
+FindPath complexGraph B F
+FindPath complexGraph G C
+FindPath complexGraph M C

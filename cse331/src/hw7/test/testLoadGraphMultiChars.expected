@@ -1,0 +1,7 @@
+# load graphs with multiple characters
+loaded graph twoCharsOneBook
+loaded graph twoCharsTwoBooksConnected
+loaded graph twoCharsTwoBooksNotConnected
+loaded graph complexGraph
+loaded graph staff
+loaded graph marvel
