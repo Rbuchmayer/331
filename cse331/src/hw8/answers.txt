@@ -9,5 +9,5 @@ the controller, or none of these.  (See the assignment for details.)
 CampusParser - Model
 CampusPaths - Model
 Location - Model
-CampusPathsMain - the static methods are the view, and the main method 
-is the controller
+CampusPathsMain - Both the controller and view. The static methods are the view, 
+and the main method is the controller.

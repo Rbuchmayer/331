@@ -6,7 +6,7 @@ import hw5.*;
 import hw7.*;
 
 /**
- * CampusPaths is immutable and stores information regarding the UW campus and
+ * CampusPaths stores information regarding the UW campus and
  * finds shortest paths
  *
  */
@@ -28,16 +28,16 @@ public class CampusPaths {
 	private static final boolean DEBUG = false;
 
 	// map to hold abbreviated names mapped to full names
-	private final Map<String, String> abbToFull;
+	private Map<String, String> abbToFull;
 
 	// map to hold full names mapped to abbreviated names
-	private final Map<String, String> fullToAbb;
+	private Map<String, String> fullToAbb;
 
 	// Graph to represent the campus
-	private final Graph<Location, Double> campusGraph;
+	private Graph<Location, Double> campusGraph;
 
 	// map to hold buildings mapped to their locations
-	private final Map<String, Location> locations;
+	private Map<String, Location> locations;
 
 	/**
 	 * Constructs a new CampusPaths Object given buildings and paths

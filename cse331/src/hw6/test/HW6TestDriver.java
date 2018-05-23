@@ -207,20 +207,18 @@ public class HW6TestDriver {
 	}
 
 	private void listChildren(String graphName, String parentName) {
-		
+
 		Graph<String, String> g = graphs.get(graphName);
 		Set<Edge<String, String>> edges = g.getOutgoingEdges(parentName);
-		Set<Edge<String, String>> orderedEdges = new TreeSet<Edge<String, String>>(new Comparator<Edge<String, String>>() {
-			public int compare(Edge<String, String> e1, Edge<String, String> e2){
-				if(!(e1.getChild().equals(e2.getChild())))
-					return e1.getChild().compareTo(e2.getChild());
-				
-				if (!(e1.getLabel().equals(e2.getLabel())))
-					return e1.getLabel().compareTo(e2.getLabel());
-				
-				return 0;
-			}
-		});
+		Set<Edge<String, String>> orderedEdges = new TreeSet<Edge<String, String>>(
+				new Comparator<Edge<String, String>>() {
+					public int compare(Edge<String, String> e1, Edge<String, String> e2) {
+						if (e1.getChild().equals(e2.getChild())) {
+							return e1.getLabel().compareTo(e2.getLabel());
+						}
+						return e1.getChild().compareTo(e2.getChild());
+					}
+				});
 		orderedEdges.addAll(edges);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
 		for (Edge<String, String> e : orderedEdges) {

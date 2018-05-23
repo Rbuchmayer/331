@@ -1,4 +1,4 @@
-package hw8;
+		package hw8;
 
 import java.util.*;
 
@@ -13,11 +13,11 @@ public class CampusPathsMain {
 	// main method to allow user interaction
 	public static void main(String[] args) {
 		try {
-			CampusPaths cp = new CampusPaths("src/hw8/data/campus_buildings.dat", "src/hw8/data/campus_paths.dat");
 			Scanner sc = new Scanner(System.in);
-			
-			String menu = "Menu:\n" + "\t" + "r to find a route\n" + "\t" + "b to see a list of all buildings\n" + "\t"
-					+ "q to quit\n";
+			CampusPaths cp = new CampusPaths("src/hw8/data/campus_buildings.dat", "src/hw8/data/campus_paths.dat");
+
+			String menu = "Menu:" + "\n" + "\t" + "r to find a route" + "\n" + "\t" + "b to see a list of all buildings"
+					+ "\n" + "\t" + "q to quit" + "\n";
 
 			System.out.println(menu);
 			System.out.print("Enter an option ('m' to see the menu): ");
@@ -26,7 +26,7 @@ public class CampusPathsMain {
 				String ans = sc.nextLine();
 
 				// echo empty lines and comments
-				if (ans.length() == 0 || ans.startsWith("#")) {
+				if (ans.startsWith("#") || ans.length() == 0) {
 					System.out.println(ans);
 					continue;
 				}
@@ -103,7 +103,7 @@ public class CampusPathsMain {
 				double dist = path.get(l).doubleValue();
 				double angle = Math.atan2(destY - y, destX - x);
 				String dir = direction(angle);
-				ret += String.format("\tWalk %.0f feet %s to (%.0f, %.0f)\n", (dist - totalDistance), dir, destX,
+				ret += String.format("\t" + "Walk %.0f feet %s to (%.0f, %.0f)" + "\n", (dist - totalDistance), dir, destX,
 						destY);
 				x = destX;
 				y = destY;
@@ -122,8 +122,8 @@ public class CampusPathsMain {
 	 * @param angle
 	 *            angle to find direction of
 	 * @requires angle != null
-	 * @return A String representing the direction of the angle (N, NW, W, SW, S,
-	 *         SE, E, NE).
+	 * @return A String representing the direction of the angle (N, NW, W, SW,
+	 *         S, SE, E, NE).
 	 */
 	private static String direction(double angle) {
 
@@ -143,6 +143,7 @@ public class CampusPathsMain {
 		final String SOUTH = "S";
 		final String SOUTH_EAST = "SE";
 
+		// look up direction
 		if (angle > fivePiOverEight && angle < sevenPiOverEight) {
 			return SOUTH_WEST;
 		}

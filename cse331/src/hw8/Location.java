@@ -18,8 +18,8 @@ public final class Location implements Comparable<Location> {
 	 * Representative Invariant: x != null and y != null
 	 * 
 	 * Abstract Function: A Location represents a point (pair of coordinate
-	 * points) p such that: p.x is the x coordinate and p.y is the y coordinate
-	 * of the location.
+	 * points) p such that: p.x is the x coordinate (this.x) and p.y is the y
+	 * coordinate (this.y) of the location.
 	 */
 
 	/**
@@ -83,7 +83,7 @@ public final class Location implements Comparable<Location> {
 	@Override
 	public int hashCode() {
 		checkRep();
-		return (int) (this.getX() + this.getY());
+		return 22 * (int) (this.getX() + this.getY());
 	}
 
 	/**
