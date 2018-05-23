@@ -118,16 +118,14 @@ public class Graph<N, L> {
 	}
 
 	/**
-	 * Adds a Node with no Edges to this Graph. If the node is already in the
-	 * Graph, all its outgoing edges will be removed.
+	 * Adds a Node with no Edges to this Graph.
 	 * 
 	 * @param data
 	 *            the data of the Node to be added to this Graph
 	 * @requires data != null
 	 * @modifies this
 	 * @effects Adds Node holding <var>data<var> with no Edges to this Graph.
-	 *          Removes all its outgoing Edges if the Node is already in the
-	 *          Graph.
+	 * 
 	 */
 	public void addNode(N data) {
 		this.map.put(data, new HashSet<Edge<N, L>>());
@@ -267,7 +265,7 @@ public class Graph<N, L> {
 		if (!this.map.containsKey(node)) {
 			throw new IllegalArgumentException("The node is not in the Graph");
 		}
-		Set<Edge<N, L>> result = new TreeSet<Edge<N, L>>();
+		Set<Edge<N, L>> result = new HashSet<Edge<N, L>>();
 		result.addAll(this.map.get(node));
 		checkRep();
 		return result;
@@ -276,8 +274,7 @@ public class Graph<N, L> {
 	/**
 	 * Returns a set of all the Nodes in this Graph
 	 * 
-	 * @return a Set that represent the data of every Node in this
-	 *         Graph
+	 * @return a Set that represent the data of every Node in this Graph
 	 */
 	public Set<N> getNodes() {
 		Set<N> result = new TreeSet<N>();

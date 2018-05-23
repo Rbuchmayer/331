@@ -56,18 +56,7 @@ public final class EdgeTests {
 		assertNotEquals(e3.toString(), "e2 pointing to n2");
 	}
 
-	// compareTo Tests
-	@Test
-	public void testCompareToEqual() {
-		assertSame(e6.compareTo(e2), 0);
-		assertSame(e4.compareTo(e4), 0);
-	}
-
-	@Test
-	public void testCompareToUnequal() {
-		assertTrue(e6.compareTo(e1) > 0);
-		assertTrue(e5.compareTo(e2) < 0);
-	}
+	
 
 	// Equals Tests
 	@Test

@@ -10,7 +10,7 @@ package hw5;
  * 
  */
 
-public final class Edge<N, L> implements Comparable<Edge<N, L>> {
+public final class Edge<N, L>  {
 
 	/*
 	 * Generic type N represents the type of the child Node of this Edge, and
@@ -78,28 +78,7 @@ public final class Edge<N, L> implements Comparable<Edge<N, L>> {
 		return (this.getLabel() + " pointing to " + this.getChild());
 	}
 
-	/**
-	 * Compares two Edges first by child Node, then by label if the child Nodes
-	 * are equal.
-	 * 
-	 * @param e
-	 *            Edge to be compared to this
-	 * @requires e != null
-	 * @return an int that is: greater than 0 if this Edge is "greater" than e,
-	 *         less than 0 if this Edge is "less" than e, equal to 0 if both
-	 *         Edge's are "equal"
-	 */
-	@Override
-	public int compareTo(Edge<N, L> e) {
-		checkRep();
-		if (!this.getChild().equals(e.getChild())) {
-			return this.getChild().hashCode() - e.getChild().hashCode();
-		}
-		if (!this.getLabel().equals(e.getLabel())) {
-			return this.getLabel().hashCode() - e.getLabel().hashCode();
-		}
-		return 0;
-	}
+	
 
 	/**
 	 * Tests if o and this Edge are equal. Two Edges are equal if they have the
@@ -132,10 +111,13 @@ public final class Edge<N, L> implements Comparable<Edge<N, L>> {
 		return label.hashCode() + child.hashCode();
 	}
 
+
 	// Private method to check if the Rep Invariant is held
 	private void checkRep() {
 		assert (this != null) : "this Edge cannot be null";
 		assert (this.label != null) : "this Edge's label cannot be null";
 		assert (this.child != null) : "this Edge's child cannot be null";
 	}
+
+
 }

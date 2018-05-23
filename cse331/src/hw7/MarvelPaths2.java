@@ -83,7 +83,7 @@ public class MarvelPaths2 {
 		}
 
 		// initialize working and finished collections
-		Queue<ArrayList<Edge<N, Double>>> active = new PriorityQueue<ArrayList<Edge<N, Double>>>(5, new compareEdges());
+		PriorityQueue<ArrayList<Edge<N, Double>>> active = new PriorityQueue<ArrayList<Edge<N, Double>>>(5, new compareEdges());
 		Set<N> finished = new HashSet<N>();
 		ArrayList<Edge<N, Double>> first = new ArrayList<Edge<N, Double>>();
 
@@ -112,6 +112,7 @@ public class MarvelPaths2 {
 					newPath.add(new Edge<N, Double>(e.getChild(), cost));
 					active.add(newPath);
 				}
+				
 			}
 			finished.add(minDest);
 		}

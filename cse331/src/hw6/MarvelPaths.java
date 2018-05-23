@@ -93,7 +93,17 @@ public class MarvelPaths {
 				return visited.get(node);
 			}
 			// explore node's children
-			Set<Edge<String, String>> edges = new TreeSet<Edge<String, String>>();
+			Set<Edge<String, String>> edges = new TreeSet<Edge<String, String>>(new Comparator<Edge<String, String>>() {
+
+				@Override
+				public int compare(Edge<String, String> o1, Edge<String, String> o2) {
+					if (o1.getChild().equals(o2.getChild())) {
+						return o1.getLabel().compareTo(o2.getLabel());
+					}
+					return o1.getChild().compareTo(o2.getChild());
+				}
+
+			});
 			edges.addAll(g.getOutgoingEdges(node));
 			for (Edge<String, String> e : edges) {
 				// if not visited, append path and mark as visited

@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+import hw8.CampusPathsMain;
+
 /**
  * This class can be used to test your Campus Paths main application. It
  * redirects System.out and System.in to input and output files, then invokes
@@ -40,7 +42,7 @@ public class HW8TestDriver {
         
         // TODO: add a line here to call your main method. For example, if your
         // main class is called CampusPaths, write:
-        // CampusPaths.main(new String[0]);
+         CampusPathsMain.main(new String[0]);
 
         // Restore standard I/O streams.
         System.setIn(stdin);

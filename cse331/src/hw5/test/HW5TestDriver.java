@@ -206,8 +206,20 @@ public class HW5TestDriver {
 
 		Graph<String, String> g = graphs.get(graphName);
 		Set<Edge<String, String>> edges = g.getOutgoingEdges(parentName);
+		Set<Edge<String, String>> sorted = new TreeSet<Edge<String, String>>(new Comparator<Edge<String, String>>() {
+
+			@Override
+			public int compare(Edge<String, String> o1, Edge<String, String> o2) {
+				if (o1.getChild().equals(o2.getChild())) {
+					return o1.getLabel().compareTo(o2.getLabel());
+				}
+				return o1.getChild().compareTo(o2.getChild());
+			}
+
+		});
+		sorted.addAll(edges);
 		output.print("the children of " + parentName + " in " + graphName + " are:");
-		for(Edge<String, String> e : edges){
+		for (Edge<String, String> e : sorted) {
 			output.print(" " + e.getChild() + "(" + e.getLabel() + ")");
 		}
 		output.println();
