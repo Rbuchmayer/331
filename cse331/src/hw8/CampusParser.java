@@ -10,6 +10,12 @@ import hw5.*;
  */
 public class CampusParser {
 
+	/*
+	 * CampusParser does not have a Rep Invariant, Abstract Function, or
+	 * CheckRep() because it is not an ADT, and we will not be creating any
+	 * CampusParser Objects.
+	 */
+
 	/**
 	 * Reads and parses the UW campus buildings file. Each line in the file
 	 * contains two string tokens followed by two double tokens, all separated

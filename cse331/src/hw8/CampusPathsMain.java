@@ -9,6 +9,12 @@ import java.util.*;
  */
 
 public class CampusPathsMain {
+	
+	/*
+	 * CampusPathsMain does not have a Rep Invariant, Abstract Function, or
+	 * CheckRep() because it is not an ADT, and we will not be creating any
+	 * CampusPathsMain Objects.
+	 */
 
 	// main method to allow user interaction
 	public static void main(String[] args) {
