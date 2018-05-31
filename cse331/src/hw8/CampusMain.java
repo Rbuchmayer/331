@@ -3,15 +3,15 @@
 import java.util.*;
 
 /**
- * CampusPathsMain is the controller and view. It allows users to interact with
+ * CampusMain is the controller and view. It allows users to interact with
  * the UW building data.
  *
  */
 
-public class CampusPathsMain {
+public class CampusMain {
 	
 	/*
-	 * CampusPathsMain does not have a Rep Invariant, Abstract Function, or
+	 * CampusMain does not have a Rep Invariant, Abstract Function, or
 	 * CheckRep() because it is not an ADT, and we will not be creating any
 	 * CampusPathsMain Objects.
 	 */

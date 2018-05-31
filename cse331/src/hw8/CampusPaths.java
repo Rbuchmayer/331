@@ -6,8 +6,8 @@ import hw5.*;
 import hw7.*;
 
 /**
- * CampusPaths stores information regarding the UW campus and
- * finds shortest paths
+ * CampusPaths stores information regarding the UW campus and finds shortest
+ * paths
  *
  */
 
@@ -119,6 +119,19 @@ public class CampusPaths {
 			System.out.println("\t" + b + ": " + sorted.get(b));
 		}
 		checkRep();
+	}
+
+	/**
+	 * Returns a Set of all the buildings
+	 * 
+	 * @return A Set containing all the full names of the UW buildings
+	 */
+	public Set<String> getBuildings() {
+		Map<String, String> buildings1 = new HashMap<String, String>();
+		buildings1.putAll(this.fullToAbb);
+		Set<String> buildings = new HashSet<String>();
+		buildings.addAll(buildings1.keySet());
+		return buildings;
 	}
 
 	/**
